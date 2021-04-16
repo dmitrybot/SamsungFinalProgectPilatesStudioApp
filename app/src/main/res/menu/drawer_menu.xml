@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/firstItem"
+            android:title="Распиcание">
+        </item>
+        <item android:id="@+id/secondItem"
+            android:title="информация">
+        </item>
+        <item android:id="@+id/thirdItem"
+            android:title="новости">
+        </item>
+        <item android:id="@+id/fourthItem"
+            android:title="Запись">
+        </item>
+        <item android:id="@+id/fifthItem"
+            android:title="Помогите">
+        </item>
+        <item android:id="@+id/sixthItem"
+            android:title="Мда">
+        </item>
+    </group>
+</menu>
