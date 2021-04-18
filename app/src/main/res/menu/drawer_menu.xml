@@ -3,32 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_notivications"
-            android:title="Уведомления">
-        </item>
-        <item android:id="@+id/nav_timetable"
-            android:title="Расписание">
+        <item android:id="@+id/nav_app_info"
+            android:title="О приложении">
         </item>
         <item android:id="@+id/nav_news"
             android:title="Новости">
-        </item>
-        <item android:id="@+id/nav_reports"
-            android:title="Отзывы">
-        </item>
-        <item android:id="@+id/nav_map"
-            android:title="Карта">
-        </item>
-        <item android:id="@+id/nav_homepage"
-            android:title="Личный кабинет">
-        </item>
-        <item android:id="@+id/nav_info"
-            android:title="Информация">
-        </item>
-        <item android:id="@+id/nav_contacts"
-            android:title="Контакты">
-        </item>
-        <item android:id="@+id/nav_appInfo"
-            android:title="О приложении">
         </item>
     </group>
 </menu>
