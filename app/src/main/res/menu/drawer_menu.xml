@@ -9,5 +9,26 @@
         <item android:id="@+id/nav_news"
             android:title="Новости">
         </item>
+        <item android:id="@+id/nav_notifications"
+            android:title="Уведомления">
+        </item>
+        <item android:id="@+id/nav_timetable"
+            android:title="Расписание">
+        </item>
+        <item android:id="@+id/nav_report"
+            android:title="Отзывы">
+        </item>
+        <item android:id="@+id/nav_maps"
+            android:title="Карты">
+        </item>
+        <item android:id="@+id/nav_contacts"
+            android:title="Контакты">
+        </item>
+        <item android:id="@+id/nav_homepage"
+            android:title="Личный кабинет">
+        </item>
+        <item android:id="@+id/nav_treners"
+            android:title="Тренера">
+        </item>
     </group>
 </menu>

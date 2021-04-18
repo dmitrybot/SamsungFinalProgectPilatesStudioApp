@@ -17,4 +17,46 @@
         android:id="@+id/nav_news"
         android:name="com.example.pilatesapp.fragments.NewsFragment"
         tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:label="Уведомления"
+        android:id="@+id/nav_notifications"
+        android:name="com.example.pilatesapp.fragments.NotificationsFragment"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:label="Расписание"
+        android:id="@+id/nav_timetable"
+        android:name="com.example.pilatesapp.fragments.TimeTableFragment"
+        tools:layout="@layout/fragment_timetable" />
+
+    <fragment
+        android:label="Отзывы"
+        android:id="@+id/nav_report"
+        android:name="com.example.pilatesapp.fragments.ReportFragment"
+        tools:layout="@layout/fragment_report" />
+
+    <fragment
+        android:label="Карты"
+        android:id="@+id/nav_maps"
+        android:name="com.example.pilatesapp.fragments.MapsFragment"
+        tools:layout="@layout/fragment_maps" />
+
+    <fragment
+        android:label="Контакты"
+        android:id="@+id/nav_contacts"
+        android:name="com.example.pilatesapp.fragments.ContactsFragment"
+        tools:layout="@layout/fragment_contacts" />
+
+    <fragment
+        android:label="Личный кабинет"
+        android:id="@+id/nav_homepage"
+        android:name="com.example.pilatesapp.fragments.HomePageFragment"
+        tools:layout="@layout/fragment_homepage" />
+
+    <fragment
+        android:label="Тренера"
+        android:id="@+id/nav_treners"
+        android:name="com.example.pilatesapp.fragments.TrenersFragment"
+        tools:layout="@layout/fragment_treners" />
 </navigation>
