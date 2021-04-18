@@ -1,4 +1,4 @@
-package com.example.pilatesapp.fragments;
+package shinepilates.app.pilatesapp.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.pilatesapp.R;
+import shinepilates.app.pilatesapp.R;
 
 public class NewsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
