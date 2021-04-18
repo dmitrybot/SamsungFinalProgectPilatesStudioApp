@@ -1,4 +1,4 @@
-package com.example.pilatesapp;
+package shinepilates.app.pilatesapp;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import shinepilates.app.pilatesapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;

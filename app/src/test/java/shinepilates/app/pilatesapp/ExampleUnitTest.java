@@ -1,4 +1,4 @@
-package com.example.pilatesapp;
+package shinepilates.app.pilatesapp;
 
 import org.junit.Test;
 
