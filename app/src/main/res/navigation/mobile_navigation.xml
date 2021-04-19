@@ -15,8 +15,7 @@
     <fragment
         android:label="Новости"
         android:id="@+id/nav_news"
-        android:name="shinepilates.app.pilatesapp.fragments.NewsFragment"
-        tools:layout="@layout/fragment_news" />
+        android:name="shinepilates.app.pilatesapp.fragments.NewsFragment"/>
 
     <fragment
         android:label="Уведомления"
