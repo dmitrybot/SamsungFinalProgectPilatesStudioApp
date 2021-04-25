@@ -29,6 +29,13 @@ public class MapsFragment extends Fragment{
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
+                map = googleMap;
+                LatLng sydney = new LatLng(55, 37);
+                map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
