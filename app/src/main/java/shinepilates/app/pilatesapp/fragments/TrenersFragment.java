@@ -6,16 +6,43 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import shinepilates.app.pilatesapp.R;
+import shinepilates.app.pilatesapp.adapters.TrenersAdapter;
+import shinepilates.app.pilatesapp.TrenersItem;
 
 public class TrenersFragment extends Fragment {
+    private RecyclerView RecyclerView;
+    private RecyclerView.Adapter Adapter;
+    private RecyclerView.LayoutManager LayoutManager;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_treners, container, false);
-        final TextView textView = root.findViewById(R.id.text);
+
+        ArrayList<TrenersItem> trenersList  = new ArrayList<>();
+        trenersList.add( new TrenersItem(R.drawable.ic_android_test, "Карпов Евгений", "Главный Тренер", "Мужик впринципе хороший, тренерует неплохо, но задолбал студаки забирать."));
+        trenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        trenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        trenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        trenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        trenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        trenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+
+        RecyclerView = root.findViewById(R.id.treners_recycler);
+        RecyclerView.setHasFixedSize(true);
+        LayoutManager = new LinearLayoutManager(getContext());
+        Adapter = new TrenersAdapter(trenersList);
+
+        RecyclerView.setLayoutManager(LayoutManager);
+        RecyclerView.setAdapter(Adapter);
+
         return root;
     }
 }

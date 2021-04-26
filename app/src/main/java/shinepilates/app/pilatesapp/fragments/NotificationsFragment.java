@@ -2,6 +2,8 @@ package shinepilates.app.pilatesapp.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,4 +20,6 @@ public class NotificationsFragment extends Fragment {
         final TextView textView = root.findViewById(R.id.text);
         return root;
     }
+
+
 }

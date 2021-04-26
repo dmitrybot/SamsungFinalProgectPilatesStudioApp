@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -19,7 +21,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import shinepilates.app.pilatesapp.R;
 
 public class MapsFragment extends Fragment{
-
     GoogleMap map;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class MapsFragment extends Fragment{
             public void onMapReady(GoogleMap googleMap) {
                 map = googleMap;
                 LatLng sydney = new LatLng(55, 37);
-                map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                map.addMarker(new MarkerOptions().position(sydney).title("Marker in Moscow"));
                 map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
 

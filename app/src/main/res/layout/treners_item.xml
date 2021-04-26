@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:background="#F5F5F5"
+    android:layout_marginTop="18dp"
+    android:layout_marginBottom="18dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:padding="2dp"
+            android:id="@+id/trener_imageView"/>
+
+        <TextView
+            android:id="@+id/trener_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Карпов Евгений"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/trener_imageView"
+            android:layout_toRightOf="@id/trener_imageView" />
+
+        <TextView
+            android:id="@+id/treners_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Главный Тренер"
+            android:textSize="15dp"
+            android:layout_toEndOf="@id/trener_imageView"
+            android:layout_toRightOf="@id/trener_imageView"
+            android:layout_below="@id/trener_name"
+            />
+        <TextView
+            android:id="@+id/treners_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Мужик впринципе хороший, тренерует неплохо, но задолбал студаки забирать."
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:layout_toEndOf="@id/trener_imageView"
+            android:layout_toRightOf="@id/trener_imageView"
+            android:layout_below="@id/treners_position"
+            />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
