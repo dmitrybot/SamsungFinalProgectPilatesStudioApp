@@ -10,14 +10,48 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import shinepilates.app.pilatesapp.R;
+import shinepilates.app.pilatesapp.adapters.NotificationAdapter;
+import shinepilates.app.pilatesapp.adapters.ReportAdapter;
+import shinepilates.app.pilatesapp.objects.Notification;
+import shinepilates.app.pilatesapp.objects.Report;
 
 public class NotificationsFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text);
+        ArrayList<Notification> notifications = new ArrayList<>();
+        notifications.add(new Notification( "date1", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 1"));
+        notifications.add(new Notification("date2", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 2"));
+        notifications.add(new Notification("date3", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 3"));
+        notifications.add(new Notification("date4", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 4"));
+        notifications.add(new Notification("date5", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 5"));
+
+        recyclerView = root.findViewById(R.id.recyclerview);
+        //recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new NotificationAdapter(notifications);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
         return root;
     }
 

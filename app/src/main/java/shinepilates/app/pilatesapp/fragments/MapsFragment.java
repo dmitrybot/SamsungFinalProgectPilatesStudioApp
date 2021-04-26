@@ -25,7 +25,6 @@ public class MapsFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_maps, container, false);
-        final TextView textView = root.findViewById(R.id.text);
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.maps);
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
