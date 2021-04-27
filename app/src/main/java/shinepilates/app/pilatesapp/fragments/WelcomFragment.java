@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,8 @@ public class WelcomFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_welcom, container, false);
-        final TextView textView = root.findViewById(R.id.text);
+        final ImageView imageView = root.findViewById(R.id.welcom_image);
+        imageView.setImageResource(R.drawable.logo);
         return root;
     }
 }
