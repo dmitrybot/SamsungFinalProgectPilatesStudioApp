@@ -1,5 +1,6 @@
 package shinepilates.app.pilatesapp;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.RenderProcessGoneDetail;
 import android.widget.TextView;
 
 import shinepilates.app.pilatesapp.R;
@@ -32,9 +35,14 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
+    private static MainActivity instance;
+    private NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        instance = this;
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -44,12 +52,13 @@ public class MainActivity extends AppCompatActivity{
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_app_info, R.id.nav_news, R.id.nav_notifications, R.id.nav_maps, R.id.nav_treners, R.id.nav_contacts
-                , R.id.nav_homepage, R.id.nav_timetable, R.id.nav_report, R.id.nav_welcom)
+                , R.id.nav_homepage, R.id.nav_timetable, R.id.nav_report)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        Menu menu = navigationView.getMenu();
         new Handler().postDelayed(new Runnable() {
               @Override
               public void run() {
@@ -82,4 +91,11 @@ public class MainActivity extends AppCompatActivity{
                 || super.onSupportNavigateUp();
     }
 
+    public static MainActivity getInstance() {
+        return instance;
+    }
+
+    public void goToFragment(int resId){
+        navController.navigate(resId);
+    }
 }

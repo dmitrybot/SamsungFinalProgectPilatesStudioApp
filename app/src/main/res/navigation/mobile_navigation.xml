@@ -10,7 +10,11 @@
         android:id="@+id/nav_welcom"
         android:label="Заставка"
         android:name="shinepilates.app.pilatesapp.fragments.WelcomFragment"
-        tools:layout="@layout/fragment_welcom" />
+        tools:layout="@layout/fragment_welcom" >
+        <action
+            android:id="@+id/action_nav_welcom_to_nav_news"
+            app:destination="@id/nav_news" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_app_info"
@@ -57,11 +61,38 @@
         android:label="Личный кабинет"
         android:id="@+id/nav_homepage"
         android:name="shinepilates.app.pilatesapp.fragments.HomePageFragment"
-        tools:layout="@layout/fragment_homepage" />
+        tools:layout="@layout/fragment_homepage" >
+        <action
+            android:id="@+id/action_nav_homepage_to_nav_authorisation"
+            app:destination="@id/nav_authorization" />
+    </fragment>
 
     <fragment
         android:label="Тренера"
         android:id="@+id/nav_treners"
         android:name="shinepilates.app.pilatesapp.fragments.TrenersFragment"
         tools:layout="@layout/fragment_treners" />
+
+    <fragment
+        android:label="Авторизация"
+        android:id="@+id/nav_authorization"
+        android:name="shinepilates.app.pilatesapp.fragments.AuthorizationFragment"
+        tools:layout="@layout/fragment_authorization" >
+        <action
+            android:id="@+id/action_nav_authorisation_to_nav_registration"
+            app:destination="@id/nav_registration" />
+        <action
+            android:id="@+id/action_nav_authorization_to_nav_homepage"
+            app:destination="@id/nav_homepage" />
+    </fragment>
+
+    <fragment
+        android:label="Регистрация"
+        android:id="@+id/nav_registration"
+        android:name="shinepilates.app.pilatesapp.fragments.RegistrationFragment"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_nav_registration_to_nav_homepage"
+            app:destination="@id/nav_homepage" />
+    </fragment>
 </navigation>
