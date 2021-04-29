@@ -7,9 +7,12 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,8 +29,10 @@ public class NotificationsFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         ArrayList<Notification> notifications = new ArrayList<>();
         notifications.add(new Notification( "date1", "Texttttttttttttttttttttttttttttttt" +
@@ -54,6 +59,12 @@ public class NotificationsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         return root;
     }
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        inflater.inflate(R.menu.menu_notifications, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 
 
 }

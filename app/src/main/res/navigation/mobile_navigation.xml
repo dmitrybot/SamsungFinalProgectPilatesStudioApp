@@ -43,7 +43,8 @@
         android:label="Отзывы"
         android:id="@+id/nav_report"
         android:name="shinepilates.app.pilatesapp.fragments.ReportFragment"
-        tools:layout="@layout/fragment_report" />
+        tools:layout="@layout/fragment_report" >
+    </fragment>
 
     <fragment
         android:label="Карты"
