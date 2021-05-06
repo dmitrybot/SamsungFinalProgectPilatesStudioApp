@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
+import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
 
 public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportViewHolder> {
@@ -28,6 +30,11 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
 
     public ReportAdapter(ArrayList<Report> reports){
         this.reports = reports;
+    }
+
+    public ArrayList<Report> getReportList(){
+        reports = MainActivity.getInstance().getReports();
+        return reports;
     }
 
     @Override

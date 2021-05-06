@@ -35,9 +35,13 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<NewsItem> NewsList =  new ArrayList<>();
     private ArrayList<Report> Reports = new ArrayList<>();
     private ArrayList<Notification> Notifications = new ArrayList<>();
+<<<<<<< Updated upstream
     private  ArrayList<User> users = new ArrayList<>();
     User user;
     boolean bdcheck = false;
+=======
+    User user;
+>>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -81,6 +85,7 @@ public class MainActivity extends AppCompatActivity{
               }
           }, 8000);
     }
+
 
     public void addTreners(){
         TrenersList = new ArrayList<>();
@@ -230,6 +235,7 @@ public class MainActivity extends AppCompatActivity{
     }*/
 
     private void generateUser(){
+<<<<<<< Updated upstream
         if (bdcheck){
             getDataFromBD();
         } else {
@@ -241,6 +247,9 @@ public class MainActivity extends AppCompatActivity{
         addNotifications();
         addUsers();
     }
+=======
+        user = new User("ttttt", "12345", "NM", "+797654321", 1);
+>>>>>>> Stashed changes
 
     private void getDataFromBD(){}
 
@@ -259,4 +268,7 @@ public class MainActivity extends AppCompatActivity{
         user = u;
     }
 
+    public User getUser(){
+        return user;
+    }
 }

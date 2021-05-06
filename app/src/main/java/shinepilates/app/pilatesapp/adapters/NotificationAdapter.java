@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
+import shinepilates.app.pilatesapp.objects.NewsItem;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
 
@@ -28,6 +30,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public NotificationAdapter(ArrayList<Notification> notifications){
         this.notifications = notifications;
+    }
+
+    public ArrayList<Notification> getNotificationList(){
+        notifications = MainActivity.getInstance().getNotifications();
+        return notifications;
     }
 
     @Override

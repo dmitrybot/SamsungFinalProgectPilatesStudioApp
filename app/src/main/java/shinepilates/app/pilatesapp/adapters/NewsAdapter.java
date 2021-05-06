@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.objects.NewsItem;
 
@@ -31,8 +32,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         }
     }
 
+
     public NewsAdapter (ArrayList<NewsItem> newsList){
         this.newsList = newsList;
+    }
+
+    public ArrayList<NewsItem> getNewsList(){
+        newsList = MainActivity.getInstance().getNews();
+        return newsList;
     }
 
     @NonNull
