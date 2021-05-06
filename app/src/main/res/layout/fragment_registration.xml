@@ -40,6 +40,7 @@
         android:layout_marginTop="8dp"
         android:autoLink="phone"
         android:hint="Password"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneEdit" />
 
@@ -52,8 +53,61 @@
         android:layout_marginTop="8dp"
         android:autoLink="phone"
         android:hint="Password2"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEdit" />
+
+    <CheckBox
+        android:id="@+id/checkBox_users_agreenment"
+        android:layout_width="33dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEdit2" />
+
+    <TextView
+        android:id="@+id/users_agreenment"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:padding="2dp"
+        android:text="@string/users_agreenment"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_users_agreenment"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEdit2"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkBox_confidetial_politic"
+        android:layout_width="33dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_users_agreenment" />
+
+    <TextView
+        android:id="@+id/confidetial_politic"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:padding="2dp"
+        android:text="@string/confidetial_politic"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_confidetial_politic"
+        app:layout_constraintTop_toBottomOf="@+id/users_agreenment"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:layout_width="wrap_content"

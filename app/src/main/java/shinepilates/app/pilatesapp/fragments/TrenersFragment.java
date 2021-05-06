@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.adapters.TrenersAdapter;
-import shinepilates.app.pilatesapp.TrenersItem;
+import shinepilates.app.pilatesapp.objects.TrenersItem;
 
 public class TrenersFragment extends Fragment {
     private RecyclerView RecyclerView;

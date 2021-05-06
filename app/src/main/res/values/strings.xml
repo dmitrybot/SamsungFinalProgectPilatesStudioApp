@@ -3,4 +3,11 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="create"><u>Создайте её!</u></string>
+    <string name="users_agreenment"><u>Пользовательское соглашение</u></string>
+    <string name="confidetial_politic"><u>Политика конфиденциальности</u></string>
+    <string-array name="sex">
+        <item>Муж.</item>
+        <item>Жен.</item>
+    </string-array>
 </resources>

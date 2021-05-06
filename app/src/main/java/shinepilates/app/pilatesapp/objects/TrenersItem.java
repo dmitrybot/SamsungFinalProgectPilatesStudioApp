@@ -1,4 +1,4 @@
-package shinepilates.app.pilatesapp;
+package shinepilates.app.pilatesapp.objects;
 
 public class TrenersItem {
     private int tImageTreners;

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import shinepilates.app.pilatesapp.R;
-import shinepilates.app.pilatesapp.TrenersItem;
 import shinepilates.app.pilatesapp.objects.NewsItem;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {

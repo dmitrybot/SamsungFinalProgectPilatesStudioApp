@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import shinepilates.app.pilatesapp.R;
-import shinepilates.app.pilatesapp.TrenersItem;
+import shinepilates.app.pilatesapp.objects.TrenersItem;
 
 public class TrenersAdapter extends RecyclerView.Adapter<TrenersAdapter.TrenersViewHolder> {
     private ArrayList<TrenersItem> mTrenersList;

@@ -37,7 +37,11 @@
         android:name="shinepilates.app.pilatesapp.fragments.AddReportFragment"
         android:id="@+id/nav_addreport"
         android:label="Добавить отзыв"
-        tools:layout="@layout/fragment_add_report"/>
+        tools:layout="@layout/fragment_add_report">
+        <action
+            android:id="@+id/action_nav_addreport_to_nav_report"
+            app:destination="@id/nav_report" />
+    </fragment>
 
     <fragment
         android:label="Расписание"
@@ -50,6 +54,9 @@
         android:id="@+id/nav_report"
         android:name="shinepilates.app.pilatesapp.fragments.ReportFragment"
         tools:layout="@layout/fragment_report" >
+        <action
+            android:id="@+id/action_nav_report_to_nav_addreport"
+            app:destination="@id/nav_addreport" />
     </fragment>
 
     <fragment
@@ -72,6 +79,12 @@
         <action
             android:id="@+id/action_nav_homepage_to_nav_authorisation"
             app:destination="@id/nav_authorization" />
+        <action
+            android:id="@+id/action_nav_homepage_to_nav_owndata"
+            app:destination="@id/nav_owndata" />
+        <action
+            android:id="@+id/action_nav_homepage_to_nav_rulles"
+            app:destination="@id/nav_rulles" />
     </fragment>
 
     <fragment
@@ -101,5 +114,48 @@
         <action
             android:id="@+id/action_nav_registration_to_nav_homepage"
             app:destination="@id/nav_homepage" />
+        <action
+            android:id="@+id/action_nav_registration_to_nav_users_agreenment"
+            app:destination="@id/nav_users_agreenment" />
+        <action
+            android:id="@+id/action_nav_registration_to_nav_confidential_politic"
+            app:destination="@id/nav_confidential_politic" />
+    </fragment>
+    <fragment
+        android:label="Личные данные"
+        android:id="@+id/nav_owndata"
+        android:name="shinepilates.app.pilatesapp.fragments.OwnDataFragment"
+        tools:layout="@layout/fragment_owndata" >
+        <action
+            android:id="@+id/action_nav_owndata_to_nav_homepage"
+            app:destination="@id/nav_homepage" />
+    </fragment>
+    <fragment
+        android:label="Правила"
+        android:id="@+id/nav_rulles"
+        android:name="shinepilates.app.pilatesapp.fragments.RullesFragment"
+        tools:layout="@layout/fragment_rulles" >
+        <action
+            android:id="@+id/action_nav_rulles_to_nav_homepage"
+            app:destination="@id/nav_homepage" />
+    </fragment>
+
+    <fragment
+        android:label="Пользоовательское соглашение"
+        android:id="@+id/nav_users_agreenment"
+        android:name="shinepilates.app.pilatesapp.fragments.UsersAgreenmentFragment"
+        tools:layout="@layout/fragment_users_agreenment" >
+        <action
+            android:id="@+id/action_nav_users_agreenment_to_nav_registration"
+            app:destination="@id/nav_registration" />
+    </fragment>
+    <fragment
+        android:label="Политика конфиденциальности"
+        android:id="@+id/nav_confidential_politic"
+        android:name="shinepilates.app.pilatesapp.fragments.ConfidentialPoliticFragment"
+        tools:layout="@layout/fragment_confidential_politic" >
+        <action
+            android:id="@+id/action_nav_confidential_politic_to_nav_registration"
+            app:destination="@id/nav_registration" />
     </fragment>
 </navigation>

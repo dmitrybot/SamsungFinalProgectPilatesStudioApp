@@ -1,39 +1,23 @@
 package shinepilates.app.pilatesapp;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Layout;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
-import android.webkit.RenderProcessGoneDetail;
-import android.widget.TextView;
-
-import shinepilates.app.pilatesapp.R;
-import shinepilates.app.pilatesapp.fragments.AddReportFragment;
-import shinepilates.app.pilatesapp.fragments.ReportFragment;
 import shinepilates.app.pilatesapp.objects.NewsItem;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
+import shinepilates.app.pilatesapp.objects.TrenersItem;
+import shinepilates.app.pilatesapp.objects.User;
 
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -41,7 +25,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawer;
@@ -52,6 +35,9 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<NewsItem> NewsList =  new ArrayList<>();
     private ArrayList<Report> Reports = new ArrayList<>();
     private ArrayList<Notification> Notifications = new ArrayList<>();
+    private  ArrayList<User> users = new ArrayList<>();
+    User user;
+    boolean bdcheck = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -63,10 +49,6 @@ public class MainActivity extends AppCompatActivity{
         drawer = findViewById(R.id.drawer_layout);
         drawer.setDrawerLockMode(drawer.LOCK_MODE_LOCKED_CLOSED);
         generateUser();
-        addTreners();
-        addNews();
-        addReports();
-        addNotifications();
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_app_info,R.id.nav_news, R.id.nav_notifications, R.id.nav_report, R.id.nav_maps, R.id.nav_treners, R.id.nav_contacts
@@ -178,6 +160,27 @@ public class MainActivity extends AppCompatActivity{
         return Notifications;
     }
 
+    public void addUsers(){
+        users = new ArrayList<>();
+        users.add(user = new User("d1", "t", "m", "p1", "e", "+7", 1, "10.20.39", "0"));
+        users.add(user = new User("d2", "t", "m", "p2", "e", "+7", 2, "10.20.39", "0"));
+        users.add(user = new User("d3", "t", "m", "p3", "e", "+7", 1, "10.20.39", "0"));
+        users.add(user = new User("d4", "t", "m", "p4", "e", "+7", 1, "10.20.39", "0"));
+    }
+
+    public ArrayList<User> getUsers(){
+        return users;
+    }
+
+    public User getUser(){
+        return user;
+    }
+
+    public void addUser(String phone, String password){
+        User u = new User(phone, password);
+        users.add(u);
+        user = u;
+    }
 
     /*@Override
     public void onBackPressed(){
@@ -227,7 +230,33 @@ public class MainActivity extends AppCompatActivity{
     }*/
 
     private void generateUser(){
+        if (bdcheck){
+            getDataFromBD();
+        } else {
+            user = new User();
+        }
+        addTreners();
+        addNews();
+        addReports();
+        addNotifications();
+        addUsers();
+    }
 
+    private void getDataFromBD(){}
+
+    public void Exit(){
+        user = new User();
+        Reports.clear();
+    }
+
+    public void updateUser(String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex){
+        user = new User(firstName, secondName, lastName, Password, Email, Phone, role, birthData, sex);
+    }
+    public void updateUser(){
+        user = new User();
+    }
+    public void updateUser(User u){
+        user = u;
     }
 
 }
