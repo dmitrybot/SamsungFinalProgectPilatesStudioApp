@@ -1,14 +1,18 @@
 package shinepilates.app.pilatesapp.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
+import shinepilates.app.pilatesapp.TrenersItem;
 import shinepilates.app.pilatesapp.adapters.ReportAdapter;
 import shinepilates.app.pilatesapp.objects.Report;
 
@@ -27,8 +33,8 @@ public class ReportFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root2 = inflater.inflate(R.layout.activity_main, container, false);
         View root = inflater.inflate(R.layout.fragment_report, container, false);
+        setHasOptionsMenu(true);
         ArrayList<Report> reports = new ArrayList<>();
         reports.add(new Report("name1", "date1", "Texttttttttttttttttttttttttttttttt" +
                 "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
@@ -47,18 +53,24 @@ public class ReportFragment extends Fragment {
                 "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 5"));
 
         recyclerView = root.findViewById(R.id.recyclerview);
-        //View drawer = root2.findViewById(R.id.drawer_layout);
-        //drawer.setDrawerLockMode(drawer.LOCK_MODE_LOCKED_CLOSED);
-        //recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new ReportAdapter(reports);
+        adapter = new ReportAdapter(MainActivity.getInstance().getReports());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         return root;
     }
 
+
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         inflater.inflate(R.menu.menu_report, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+    public void update (){
+        adapter = new ReportAdapter(MainActivity.getInstance().getReports());
+    }
+
+    /*public void Addclick (MenuItem item){
+        MainActivity.getInstance().goToFragment(R.id.nav_addreport);
+    }*/
 }

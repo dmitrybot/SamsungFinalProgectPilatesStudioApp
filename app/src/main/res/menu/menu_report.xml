@@ -6,7 +6,7 @@
         android:id="@+id/addReport"
         android:orderInCategory="100"
         android:icon="@drawable/add_icon"
-        android:title="Settings"
+        android:title="add"
         app:showAsAction="ifRoom" />
 
 </menu>

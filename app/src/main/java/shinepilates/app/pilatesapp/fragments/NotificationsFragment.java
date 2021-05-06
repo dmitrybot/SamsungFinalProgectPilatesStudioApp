@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.adapters.NotificationAdapter;
 import shinepilates.app.pilatesapp.adapters.ReportAdapter;
@@ -54,16 +55,20 @@ public class NotificationsFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recyclerview);
         //recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new NotificationAdapter(notifications);
+        adapter = new NotificationAdapter(MainActivity.getInstance().getNotifications());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         return root;
     }
 
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+    public void update (){
+        adapter = new NotificationAdapter(MainActivity.getInstance().getNotifications());
+    }
+
+    /*public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         inflater.inflate(R.menu.menu_notifications, menu);
         super.onCreateOptionsMenu(menu, inflater);
-    }
+    }*/
 
 
 

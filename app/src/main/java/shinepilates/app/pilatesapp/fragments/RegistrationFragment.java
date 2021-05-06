@@ -18,7 +18,6 @@ public class RegistrationFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_registration, container, false);
         creation = root.findViewById(R.id.create);
-
         creation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

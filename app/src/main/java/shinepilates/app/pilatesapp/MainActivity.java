@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +15,11 @@ import android.webkit.RenderProcessGoneDetail;
 import android.widget.TextView;
 
 import shinepilates.app.pilatesapp.R;
+import shinepilates.app.pilatesapp.fragments.AddReportFragment;
+import shinepilates.app.pilatesapp.fragments.ReportFragment;
+import shinepilates.app.pilatesapp.objects.NewsItem;
+import shinepilates.app.pilatesapp.objects.Notification;
+import shinepilates.app.pilatesapp.objects.Report;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,6 +48,10 @@ public class MainActivity extends AppCompatActivity{
     private AppBarConfiguration mAppBarConfiguration;
     private static MainActivity instance;
     private NavController navController;
+    private ArrayList<TrenersItem> TrenersList = new ArrayList<>();
+    private ArrayList<NewsItem> NewsList =  new ArrayList<>();
+    private ArrayList<Report> Reports = new ArrayList<>();
+    private ArrayList<Notification> Notifications = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -52,6 +62,11 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         drawer.setDrawerLockMode(drawer.LOCK_MODE_LOCKED_CLOSED);
+        generateUser();
+        addTreners();
+        addNews();
+        addReports();
+        addNotifications();
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_app_info,R.id.nav_news, R.id.nav_notifications, R.id.nav_report, R.id.nav_maps, R.id.nav_treners, R.id.nav_contacts
@@ -85,6 +100,84 @@ public class MainActivity extends AppCompatActivity{
           }, 8000);
     }
 
+    public void addTreners(){
+        TrenersList = new ArrayList<>();
+        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Карпов Евгений", "Главный Тренер", "Мужик впринципе хороший, тренерует неплохо, но задолбал студаки забирать."));
+        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem(R.drawable.ic_icon_test, "Name", "position", "description"));
+    }
+
+    public ArrayList<TrenersItem> getTreners(){
+        return TrenersList;
+    }
+
+    public void addNews(){
+        NewsList = new ArrayList<>();
+        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date1", "tag", "main_text"));
+        NewsList.add( new NewsItem(0, "date2", "tag", "main_text"));
+        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date3", "tag", "main_text"));
+        NewsList.add( new NewsItem(0, "date4", "tag", "main_text"));
+        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date5", "tag", "main_text"));
+        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date6", "tag", "main_text"));
+        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date7", "tag", "main_text"));
+        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date8", "tag2", "main_text"));
+    }
+
+    public ArrayList<NewsItem> getNews(){
+        return NewsList;
+    }
+
+    public void addReports(){
+        Reports = new ArrayList<>();
+        Reports.add(new Report("name1", "date1", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 1"));
+        Reports.add(new Report("name2", "date2", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 2"));
+        Reports.add(new Report("name3", "date3", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 3"));
+        Reports.add(new Report("name4", "date4", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 4"));
+        Reports.add(new Report("name5", "date5", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 555"));
+    }
+
+    public ArrayList<Report> getReports(){
+        return Reports;
+    }
+
+    public void addNotifications(){
+        Notifications = new ArrayList<>();
+        Notifications.add(new Notification( "date1", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 1"));
+        Notifications.add(new Notification("date2", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 2"));
+        Notifications.add(new Notification("date3", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 3"));
+        Notifications.add(new Notification("date4", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 444"));
+        Notifications.add(new Notification("date5", "Texttttttttttttttttttttttttttttttt" +
+                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
+                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 555"));
+    }
+
+    public ArrayList<Notification> getNotifications(){
+        return Notifications;
+    }
+
 
     /*@Override
     public void onBackPressed(){
@@ -103,7 +196,13 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }*/
 
-
+    /*public void Addclick (MenuItem item){
+        Layout layout;
+        AddReportFragment SF = new AddReportFragment();
+        FragmentTransaction FT = getSupportFragmentManager().beginTransaction();
+        FT.replace(R.id.drawer_layout, SF);
+        FT.commit();
+    }*/
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -126,5 +225,9 @@ public class MainActivity extends AppCompatActivity{
         NavController navController = Navigation.findNavController(this, R.id.welcom_image);
         return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }*/
+
+    private void generateUser(){
+
+    }
 
 }

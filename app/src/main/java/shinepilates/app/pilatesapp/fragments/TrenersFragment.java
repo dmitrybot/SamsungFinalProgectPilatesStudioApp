@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.adapters.TrenersAdapter;
 import shinepilates.app.pilatesapp.TrenersItem;
@@ -38,11 +39,16 @@ public class TrenersFragment extends Fragment {
         RecyclerView = root.findViewById(R.id.treners_recycler);
         RecyclerView.setHasFixedSize(true);
         LayoutManager = new LinearLayoutManager(getContext());
-        Adapter = new TrenersAdapter(trenersList);
+        Adapter = new TrenersAdapter(MainActivity.getInstance().getTreners());
 
         RecyclerView.setLayoutManager(LayoutManager);
         RecyclerView.setAdapter(Adapter);
 
+
         return root;
+    }
+
+    public void update(){
+        MainActivity.getInstance().getTreners();
     }
 }

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.TrenersItem;
 import shinepilates.app.pilatesapp.adapters.NewsAdapter;
@@ -42,7 +43,7 @@ public class NewsFragment extends Fragment {
         RecyclerView = root.findViewById(R.id.news_recycler);
         RecyclerView.setHasFixedSize(true);
         LayoutManager = new LinearLayoutManager(getContext());
-        Adapter = new NewsAdapter(newsList);
+        Adapter = new NewsAdapter(MainActivity.getInstance().getNews());
 
         RecyclerView.setLayoutManager(LayoutManager);
         RecyclerView.setAdapter(Adapter);

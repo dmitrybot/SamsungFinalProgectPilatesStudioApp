@@ -34,6 +34,12 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
+        android:name="shinepilates.app.pilatesapp.fragments.AddReportFragment"
+        android:id="@+id/nav_addreport"
+        android:label="Добавить отзыв"
+        tools:layout="@layout/fragment_add_report"/>
+
+    <fragment
         android:label="Расписание"
         android:id="@+id/nav_timetable"
         android:name="shinepilates.app.pilatesapp.fragments.TimeTableFragment"
