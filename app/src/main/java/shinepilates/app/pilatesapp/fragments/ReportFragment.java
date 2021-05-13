@@ -9,13 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-<<<<<<< Updated upstream
-=======
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavOptions;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
->>>>>>> Stashed changes
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -24,14 +18,9 @@ import java.util.ArrayList;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
-<<<<<<< Updated upstream
-=======
-import shinepilates.app.pilatesapp.TrenersItem;
-import shinepilates.app.pilatesapp.User;
-import shinepilates.app.pilatesapp.adapters.NewsAdapter;
->>>>>>> Stashed changes
 import shinepilates.app.pilatesapp.adapters.ReportAdapter;
 import shinepilates.app.pilatesapp.objects.Report;
+import shinepilates.app.pilatesapp.objects.User;
 
 public class ReportFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -46,10 +35,12 @@ public class ReportFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_report, container, false);
         setHasOptionsMenu(true);
         recyclerView = root.findViewById(R.id.recyclerview);
+        recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         adapter = new ReportAdapter(MainActivity.getInstance().getReports());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        reports = MainActivity.getInstance().getReports();
         swipeRefresh = root.findViewById(R.id.swipeRefresh);
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {

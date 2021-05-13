@@ -22,12 +22,12 @@ import java.util.ArrayList;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
-import shinepilates.app.pilatesapp.User;
 import shinepilates.app.pilatesapp.adapters.NewsAdapter;
 import shinepilates.app.pilatesapp.adapters.NotificationAdapter;
 import shinepilates.app.pilatesapp.adapters.ReportAdapter;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
+import shinepilates.app.pilatesapp.objects.User;
 
 public class NotificationsFragment extends Fragment {
     private RecyclerView recyclerView;

@@ -35,13 +35,10 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<NewsItem> NewsList =  new ArrayList<>();
     private ArrayList<Report> Reports = new ArrayList<>();
     private ArrayList<Notification> Notifications = new ArrayList<>();
-<<<<<<< Updated upstream
     private  ArrayList<User> users = new ArrayList<>();
     User user;
     boolean bdcheck = false;
-=======
-    User user;
->>>>>>> Stashed changes
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -83,13 +80,13 @@ public class MainActivity extends AppCompatActivity{
               public void run() {
                   navController.navigate(R.id.nav_news);
               }
-          }, 8000);
+          }, 80);
     }
 
 
     public void addTreners(){
         TrenersList = new ArrayList<>();
-        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Карпов Евгений", "Главный Тренер", "Мужик впринципе хороший, тренерует неплохо, но задолбал студаки забирать."));
+        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Карпов Евгений", "Главный Тренер", "NICEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"));
         TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
         TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
         TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
@@ -137,7 +134,6 @@ public class MainActivity extends AppCompatActivity{
                 "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
                 "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 555"));
     }
-
     public ArrayList<Report> getReports(){
         return Reports;
     }
@@ -177,9 +173,6 @@ public class MainActivity extends AppCompatActivity{
         return users;
     }
 
-    public User getUser(){
-        return user;
-    }
 
     public void addUser(String phone, String password){
         User u = new User(phone, password);
@@ -235,7 +228,7 @@ public class MainActivity extends AppCompatActivity{
     }*/
 
     private void generateUser(){
-<<<<<<< Updated upstream
+        user = new User();
         if (bdcheck){
             getDataFromBD();
         } else {
@@ -247,15 +240,12 @@ public class MainActivity extends AppCompatActivity{
         addNotifications();
         addUsers();
     }
-=======
-        user = new User("ttttt", "12345", "NM", "+797654321", 1);
->>>>>>> Stashed changes
 
     private void getDataFromBD(){}
 
     public void Exit(){
         user = new User();
-        Reports.clear();
+        //Reports.clear();
     }
 
     public void updateUser(String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex){

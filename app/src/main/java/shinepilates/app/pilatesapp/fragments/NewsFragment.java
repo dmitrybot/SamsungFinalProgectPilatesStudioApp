@@ -6,20 +6,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< Updated upstream
-=======
 import android.widget.Adapter;
 import android.widget.TextView;
->>>>>>> Stashed changes
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-<<<<<<< Updated upstream
-=======
+
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
->>>>>>> Stashed changes
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -28,13 +24,9 @@ import java.util.ArrayList;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
-<<<<<<< Updated upstream
-=======
-import shinepilates.app.pilatesapp.TrenersItem;
-import shinepilates.app.pilatesapp.User;
->>>>>>> Stashed changes
 import shinepilates.app.pilatesapp.adapters.NewsAdapter;
 import shinepilates.app.pilatesapp.objects.NewsItem;
+import shinepilates.app.pilatesapp.objects.User;
 
 public class NewsFragment extends Fragment {
     private androidx.recyclerview.widget.RecyclerView RecyclerView;

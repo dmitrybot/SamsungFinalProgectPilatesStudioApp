@@ -96,7 +96,7 @@ public class User {
     }
 
     public String getFullName(){
-        return firstName + " " + lastName;
+        return firstName + " " + secondName;
     }
 
     public String getBirthData() {
