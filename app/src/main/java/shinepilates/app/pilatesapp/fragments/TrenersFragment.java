@@ -1,6 +1,7 @@
 package shinepilates.app.pilatesapp.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,7 +46,7 @@ public class TrenersFragment extends Fragment {
         RecyclerView.setLayoutManager(LayoutManager);
         RecyclerView.setAdapter(Adapter);
         treners = MainActivity.getInstance().getTreners();
-
+        Log.d("sdfgbhnhgfdsdfghnjfd", "dfgfbfdedwqedefrgftdesgnmjfdesesghfngdedgrhfngmfrdgfnhgfbfvg");
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {

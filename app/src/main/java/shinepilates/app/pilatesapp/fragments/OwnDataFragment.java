@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Space;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,16 +20,22 @@ import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.objects.User;
 
+import static android.graphics.Color.RED;
+
 public class OwnDataFragment extends Fragment {
     EditText firstName, secondName, lastName, Phone, birthData, Email;
+    TextView phone;
     Spinner spinnerSex;
     Button update;
     User user;
+
+    private static OwnDataFragment instance;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         user = MainActivity.getInstance().getUser();
+        instance = this;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,24 +49,49 @@ public class OwnDataFragment extends Fragment {
         Email = root.findViewById(R.id.emailEdit);
         spinnerSex = root.findViewById(R.id.spinner_sex);
         update = root.findViewById(R.id.update);
+        phone = root.findViewById(R.id.phone);
 
-        firstName.setText(user.getFirstName());
-        secondName.setText(user.getSecondName());
-        lastName.setText(user.getLastName());
-        Phone.setText(user.getPhone());
-        birthData.setText(user.getBirthData());
-        Email.setText(user.getEmail());
-        spinnerSex.setSelection(Integer.parseInt(user.getSex()));
+        if(user.getSex() != null){
+            spinnerSex.setSelection(Integer.parseInt(user.getSex()));
+        }
+        if(user.getEmail() != null){
+            Email.setText(user.getEmail());
+        }
+        if(user.getEmail() != null){
+            Email.setText(user.getEmail());
+        }
+        if(user.getBirthData() != null){
+            birthData.setText(user.getBirthData());
+        }
+        if(user.getPhone() != null){
+            Phone.setText(user.getPhone());
+        }
+        if(user.getLastName() != null){
+            lastName.setText(user.getLastName());
+        }if(user.getSecondName() != null){
+            secondName.setText(user.getSecondName());
+        }
+        if(user.getFirstName() != null){
+            firstName.setText(user.getFirstName());
+        }
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity.getInstance().updateUser(String.valueOf(firstName.getText()), String.valueOf(secondName.getText()), String.valueOf(lastName.getText()), user.getPassword(), String.valueOf(Email.getText()), String.valueOf(Phone.getText()), user.getRole(), String.valueOf(birthData.getText()), String.valueOf(spinnerSex.getSelectedItemPosition()));
-                HomePageFragment.getInstance().updateUser();
-                MainActivity.getInstance().goToFragment(R.id.nav_homepage);
             }
         });
 
         return root;
     }
+
+    public static OwnDataFragment getInstance(){
+        return instance;
+    }
+
+    public void setPhoneExeption(){
+        phone.setText("Введенный номер уже зарегистрирован");
+        phone.setTextColor(RED);
+    }
+
 }

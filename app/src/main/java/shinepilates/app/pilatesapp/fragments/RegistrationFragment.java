@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import shinepilates.app.pilatesapp.MainActivity;
@@ -22,6 +23,16 @@ public class RegistrationFragment extends Fragment {
     EditText phone, password, password2;
     CheckBox checkBoxUsersAgreenment, checkBoxConfidentialPolitics;
     TextView UsersAgreenment, ConfidentialPolitics, textView;
+
+    private static RegistrationFragment instance;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        instance = this;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_registration, container, false);
@@ -63,8 +74,6 @@ public class RegistrationFragment extends Fragment {
         String pas2= String.valueOf(password2.getText());
         if (pas1.equals(pas2) && checkBoxConfidentialPolitics.isChecked() && checkBoxUsersAgreenment.isChecked()) {
             MainActivity.getInstance().addUser(ph, pas1);
-            HomePageFragment.getInstance().generate();
-            MainActivity.getInstance().goToFragment(R.id.nav_homepage);
         }else if(ph.equals("") || pas1.equals("") || pas2.equals("")){
             textView.setTextColor(RED);
             textView.setTextSize(15);
@@ -82,5 +91,15 @@ public class RegistrationFragment extends Fragment {
             textView.setTextSize(15);
             textView.setText("Примите пользовательское соглашение,\nчтобы мы смогли вас зарегистрировать");
         }
+    }
+
+    public static RegistrationFragment getInstance(){
+        return instance;
+    }
+
+    public void wrongTry(String s){
+        textView.setTextColor(RED);
+        textView.setTextSize(15);
+        textView.setText(s);
     }
 }

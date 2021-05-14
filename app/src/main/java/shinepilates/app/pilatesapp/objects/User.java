@@ -1,117 +1,155 @@
 package shinepilates.app.pilatesapp.objects;
 
+import shinepilates.app.pilatesapp.model.UserModel;
+
 public class User {
-    private String firstName;
-    private String secondName;
-    private String lastName;
-    private String Password;
-    private String Email;
-    private String Phone;
-    private int Role;
-    private String BirthData;
-    private String Sex;
+    private Long   id;
+    private String firstname;
+    private String secondname;
+    private String lastname;
+    private String password;
+    private String email;
+    private String phone;
+    private int    role;
+    private String birthdata;
+    private String sex;
 
 
     public User(){
-        Role = 0;
+        role = 0;
     }
 
     public User(String phone, String password){
-        this.firstName = "";
-        this.secondName = "";
-        this.lastName = "";
-        this.Password = password;
-        this.Email = "";
-        this.Phone = phone;
-        Role = 1;
-        BirthData = "";
-        Sex = "0";
+        this.firstname = "";
+        this.secondname = "";
+        this.lastname = "";
+        this.password = password;
+        this.email = "";
+        this.phone = phone;
+        role = 1;
+        birthdata = "";
+        sex = "0";
     }
+    public User(Long id, String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex) {
+        this.id = id;
+        this.firstname = firstName;
+        this.secondname = secondName;
+        this.lastname = lastName;
+        this.password = Password;
+        this.email = Email;
+        this.phone = Phone;
+        this.role = role;
+        birthdata = birthData;
+        this.sex = sex;
+    }
+
     public User(String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.lastName = lastName;
-        this.Password = Password;
-        this.Email = Email;
-        this.Phone = Phone;
-        Role = role;
-        BirthData = birthData;
-        Sex = sex;
+        this.firstname = firstName;
+        this.secondname = secondName;
+        this.lastname = lastName;
+        this.password = Password;
+        this.email = Email;
+        this.phone = Phone;
+        this.role = role;
+        birthdata = birthData;
+        this.sex = sex;
     }
 
     public int getRole() {
-        return Role;
+        return role;
     }
 
     public void setRole(int role) {
-        Role = role;
+        role = role;
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        Phone = phone;
+        phone = phone;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        email = email;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        password = password;
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstname;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstname = firstName;
     }
 
     public String getSecondName() {
-        return secondName;
+        return secondname;
     }
 
     public void setSecondName(String secondName) {
-        this.secondName = secondName;
+        this.secondname = secondName;
     }
 
     public String getLastName() {
-        return lastName;
+        return lastname;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastname = lastName;
     }
 
     public String getFullName(){
-        return firstName + " " + secondName;
+        return firstname + " " + secondname;
     }
 
     public String getBirthData() {
-        return BirthData;
+        return birthdata;
     }
 
     public void setBirthData(String birthData) {
-        BirthData = birthData;
+        birthdata = birthData;
     }
 
     public String getSex() {
-        return Sex;
+        return sex;
     }
 
     public void setSex(String sex) {
-        Sex = sex;
+        this.sex = sex;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UserModel UserToModel(String lastphone){
+        return new UserModel(id,
+        firstname,
+        secondname,
+        lastname,
+        password,
+        email,
+        phone,
+        role,
+        birthdata,
+        sex, lastphone);
+
     }
 }

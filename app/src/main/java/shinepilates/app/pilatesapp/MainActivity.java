@@ -2,9 +2,11 @@ package shinepilates.app.pilatesapp;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.View;
 
+import shinepilates.app.pilatesapp.network.Network;
 import shinepilates.app.pilatesapp.objects.NewsItem;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
@@ -25,6 +27,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawer;
@@ -37,19 +40,26 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<Notification> Notifications = new ArrayList<>();
     private  ArrayList<User> users = new ArrayList<>();
     User user;
-    boolean bdcheck = false;
 
+    Network network;
+
+    boolean bdcheck = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         instance = this;
+
+        network = new Network();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         drawer.setDrawerLockMode(drawer.LOCK_MODE_LOCKED_CLOSED);
+
         generateUser();
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_app_info,R.id.nav_news, R.id.nav_notifications, R.id.nav_report, R.id.nav_maps, R.id.nav_treners, R.id.nav_contacts
@@ -74,13 +84,16 @@ public class MainActivity extends AppCompatActivity{
         });
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
         Menu menu = navigationView.getMenu();
-        new Handler().postDelayed(new Runnable() {
-              @Override
-              public void run() {
-                  navController.navigate(R.id.nav_news);
-              }
-          }, 80);
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                generateUser();
+                navController.navigate(R.id.nav_news);
+            }
+        });
     }
 
 
@@ -162,11 +175,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void addUsers(){
-        users = new ArrayList<>();
-        users.add(user = new User("d1", "t", "m", "p1", "e", "+7", 1, "10.20.39", "0"));
-        users.add(user = new User("d2", "t", "m", "p2", "e", "+7", 2, "10.20.39", "0"));
-        users.add(user = new User("d3", "t", "m", "p3", "e", "+7", 1, "10.20.39", "0"));
-        users.add(user = new User("d4", "t", "m", "p4", "e", "+7", 1, "10.20.39", "0"));
+        network.getUsers();
     }
 
     public ArrayList<User> getUsers(){
@@ -176,8 +185,9 @@ public class MainActivity extends AppCompatActivity{
 
     public void addUser(String phone, String password){
         User u = new User(phone, password);
-        users.add(u);
         user = u;
+        network.postUser(u);
+
     }
 
     /*@Override
@@ -228,7 +238,6 @@ public class MainActivity extends AppCompatActivity{
     }*/
 
     private void generateUser(){
-        user = new User();
         if (bdcheck){
             getDataFromBD();
         } else {
@@ -249,12 +258,29 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void updateUser(String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex){
-        user = new User(firstName, secondName, lastName, Password, Email, Phone, role, birthData, sex);
+        String s = "-";
+        if (!user.getPhone().equals(Phone)){
+            s = user.getPhone();
+        }
+        User u = new User(user.getId(), firstName, secondName, lastName, Password, Email, Phone, role, birthData, sex);
+        network.updateUser(u, s);
     }
     public void updateUser(){
         user = new User();
     }
     public void updateUser(User u){
+        user = u;
+    }
+
+    int C(){
+        return users.size();
+    }
+
+    public void setUsers(List<User> u){
+        users = (ArrayList) u;
+    }
+
+    public void setUser(User u){
         user = u;
     }
 
