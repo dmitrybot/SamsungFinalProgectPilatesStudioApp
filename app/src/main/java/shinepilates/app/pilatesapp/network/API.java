@@ -23,6 +23,9 @@ public interface API {
     @GET("users")
     Call<List<User>> getAll();
 
+    @POST("user")
+    Call<User> getUser(@Body User user);
+
     @POST("users/")
     Call<User> postUser(@Body User user);
 

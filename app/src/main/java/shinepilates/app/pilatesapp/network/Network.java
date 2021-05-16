@@ -18,6 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
+import shinepilates.app.pilatesapp.fragments.AuthorizationFragment;
 import shinepilates.app.pilatesapp.fragments.HomePageFragment;
 import shinepilates.app.pilatesapp.fragments.OwnDataFragment;
 import shinepilates.app.pilatesapp.fragments.RegistrationFragment;
@@ -33,7 +34,7 @@ public class Network {
                 .setLenient()
                 .create();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.7:8080/")
+                .baseUrl("http://192.168.1.5:8080/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -54,6 +55,30 @@ public class Network {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void getUser(User user) {
+        Call<User> call = api.getUser(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                /*Message msg = new Message();
+
+                msg.obj = response.body();
+                handler.sendMessage(msg);*/
+                User u = response.body();
+                if (u.getPhone().equals("phone") || u.getPhone().equals("password")){
+                    AuthorizationFragment.getInstance().AuthFalse(u);
+                } else {
+                    AuthorizationFragment.getInstance().AuthRight(u);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
                 t.printStackTrace();
             }
         });

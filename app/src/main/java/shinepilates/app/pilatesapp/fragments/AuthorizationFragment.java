@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import shinepilates.app.pilatesapp.MainActivity;
@@ -22,6 +23,14 @@ public class AuthorizationFragment extends Fragment {
     TextView goToRegistration;
     Button enter;
     EditText phoneEdit, passwordEdit;
+    static AuthorizationFragment instance;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        instance = this;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_authorization, container, false);
@@ -50,22 +59,28 @@ public class AuthorizationFragment extends Fragment {
         String phone = String.valueOf(phoneEdit.getText());
         String password = String.valueOf(passwordEdit.getText());
         boolean k = true;
-        for (User u: MainActivity.getInstance().getUsers()){
-            if (u.getPhone().equals(phone) && u.getPassword().equals(password)){
-                k = false;
-                MainActivity.getInstance().updateUser(u);
-                HomePageFragment.getInstance().generate();
-                MainActivity.getInstance().goToFragment(R.id.nav_homepage);
-                break;
-            }
-        }
-        if (k){
+        MainActivity.getInstance().Authorisation(phone, password);
+    }
+
+    public void AuthRight(User u){
+        MainActivity.getInstance().updateUser(u);
+        HomePageFragment.getInstance().generate();
+        MainActivity.getInstance().goToFragment(R.id.nav_homepage);
+    }
+
+    public void AuthFalse(User u){
+        if (u.getPhone().equals("phone")) {
             phoneEdit.setTextColor(RED);
+        } else {
             passwordEdit.setTextColor(RED);
         }
     }
 
     public void goToRegistr(View v){
         MainActivity.getInstance().goToFragment(R.id.nav_registration);
+    }
+
+    public static AuthorizationFragment getInstance(){
+        return instance;
     }
 }

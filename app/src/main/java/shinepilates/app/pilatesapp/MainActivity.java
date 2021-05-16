@@ -287,4 +287,9 @@ public class MainActivity extends AppCompatActivity{
     public User getUser(){
         return user;
     }
+
+    public void Authorisation(String phone, String password){
+        User u = new User(phone, password);
+        network.getUser(u);
+    }
 }
