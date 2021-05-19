@@ -6,6 +6,7 @@ import android.os.Message;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,8 @@ import shinepilates.app.pilatesapp.fragments.HomePageFragment;
 import shinepilates.app.pilatesapp.fragments.OwnDataFragment;
 import shinepilates.app.pilatesapp.fragments.RegistrationFragment;
 import shinepilates.app.pilatesapp.model.UserModel;
+import shinepilates.app.pilatesapp.objects.Notification;
+import shinepilates.app.pilatesapp.objects.Report;
 import shinepilates.app.pilatesapp.objects.User;
 
 public class Network {
@@ -106,20 +109,6 @@ public class Network {
             }
         });
     }
-    /*
-    public void deleteEmployee(Employee employee, Handler handler) {
-        api.deleteEmployee(employee.getId()).enqueue(new Callback<Employee>() {
-            @Override
-            public void onResponse(Call<Employee> call, Response<Employee> response) {
-                getEmployees(handler);
-            }
-
-            @Override
-            public void onFailure(Call<Employee> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }*/
 
     public void updateUser(User user, String s){
         UserModel userModel = user.UserToModel(s);
@@ -140,6 +129,96 @@ public class Network {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+    /* ------------------------------------------------------------------------------------
+    reports
+     ---------------------------------------------------------------------------------------*/
+    public void getReports() {
+        Call<List<Report>> call = api.getReports();
+        call.enqueue(new Callback<List<Report>>() {
+            @Override
+            public void onResponse(Call<List<Report>> call, Response<List<Report>> response) {
+                MainActivity.getInstance().setReports(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Report>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void postReport(Report report) {
+        api.postReport(report).enqueue(new Callback<Report>() {
+            @Override
+            public void onResponse(Call<Report> call, Response<Report> response) {
+                // body
+            }
+
+            @Override
+            public void onFailure(Call<Report> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void deleteReport(Report report) {
+        api.deleteReport(report).enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                //body
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+    /* ------------------------------------------------------------------------------------
+    notifications
+     ---------------------------------------------------------------------------------------*/
+
+    public void postNotification(Notification notification, User user) {
+        api.postNotification(notification, user.getId()).enqueue(new Callback<Notification>() {
+            @Override
+            public void onResponse(Call<Notification> call, Response<Notification> response) {
+                // body
+            }
+
+            @Override
+            public void onFailure(Call<Notification> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void deleteNotification(Notification notification) {
+        api.deleteNotification(notification).enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                //body
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void updateNotification(Notification notification){
+        api.updateNotification(notification.getId()).enqueue(new Callback<Notification>() {
+            @Override
+            public void onResponse(Call<Notification> call, Response<Notification> response) {
+                //body
+            }
+
+            @Override
+            public void onFailure(Call<Notification> call, Throwable t) {
                 t.printStackTrace();
             }
         });

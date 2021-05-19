@@ -2,7 +2,6 @@ package shinepilates.app.pilatesapp;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.view.Menu;
 import android.view.View;
 
@@ -130,22 +129,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void addReports(){
-        Reports = new ArrayList<>();
-        Reports.add(new Report("name1", "date1", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 1"));
-        Reports.add(new Report("name2", "date2", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 2"));
-        Reports.add(new Report("name3", "date3", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 3"));
-        Reports.add(new Report("name4", "date4", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 4"));
-        Reports.add(new Report("name5", "date5", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 555"));
+        network.getReports();
     }
     public ArrayList<Report> getReports(){
         return Reports;
@@ -262,7 +246,7 @@ public class MainActivity extends AppCompatActivity{
         if (!user.getPhone().equals(Phone)){
             s = user.getPhone();
         }
-        User u = new User(user.getId(), firstName, secondName, lastName, Password, Email, Phone, role, birthData, sex);
+        User u = new User(user.getId(), firstName, secondName, lastName, Password, Email, Phone, role, birthData, sex, user.getNotifications());
         network.updateUser(u, s);
     }
     public void updateUser(){
@@ -291,5 +275,9 @@ public class MainActivity extends AppCompatActivity{
     public void Authorisation(String phone, String password){
         User u = new User(phone, password);
         network.getUser(u);
+    }
+
+    public void setReports(List<Report> r){
+        Reports = (ArrayList) r;
     }
 }

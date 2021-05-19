@@ -17,16 +17,20 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import shinepilates.app.pilatesapp.model.UserModel;
+import shinepilates.app.pilatesapp.objects.Notification;
+import shinepilates.app.pilatesapp.objects.Report;
 import shinepilates.app.pilatesapp.objects.User;
 
 public interface API {
+
+    //users
     @GET("users")
     Call<List<User>> getAll();
 
     @POST("user")
     Call<User> getUser(@Body User user);
 
-    @POST("users/")
+    @POST("users")
     Call<User> postUser(@Body User user);
 
     @DELETE("/users/{id}")
@@ -34,4 +38,24 @@ public interface API {
 
     @PUT("/users")
     Call<User> updateUser(@Body UserModel user);
+
+    //reports
+    @GET("reports")
+    Call<List<Report>> getReports();
+
+    @POST("reports")
+    Call<Report> postReport(@Body Report report);
+
+    @DELETE("/reports")
+    Call<Report> deleteReport(@Body Report report);
+
+    //notifications
+    @POST("/notifications/{userId}")
+    Call<Notification> postNotification(@Body Notification notification, @Path("userId") Long userId);
+
+    @PUT("/notifications/{id}")
+    Call<Notification> updateNotification(@Path("id") Long id);
+
+    @DELETE("/notifications")
+    Call deleteNotification(@Body Notification notification);
 }

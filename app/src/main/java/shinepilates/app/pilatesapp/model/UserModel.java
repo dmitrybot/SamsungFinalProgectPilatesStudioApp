@@ -1,13 +1,15 @@
 package shinepilates.app.pilatesapp.model;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shinepilates.app.pilatesapp.objects.Notification;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class UserModel {
 
@@ -22,9 +24,10 @@ public class UserModel {
     private String birthdata;
     private String sex;
     private String lastphone;
+    List<Notification> notifications;
 
     public UserModel(Long id, String firstname, String secondname, String lastname, String password, String email, String phone,
-            int role, String birthdata, String sex, String lastphone){
+            int role, String birthdata, String sex, String lastphone, List<Notification> notifications){
         this.id         = id;
         this.firstname  = firstname;
         this.secondname = secondname;
@@ -36,5 +39,6 @@ public class UserModel {
         this.birthdata  = birthdata;
         this.sex        = sex;
         this.lastphone  = lastphone;
+        this.notifications = notifications;
     }
 }

@@ -1,36 +1,32 @@
 package shinepilates.app.pilatesapp.objects;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
 public class Report {
-    private String mainText;
+    private Long id;
+
+    private String maintext;
     private String date;
     private String name;
-    public Report(String name, String date, String mainText){
-        this.mainText = mainText;
+
+    public Report(String maintext, String date, String name){
+        this.maintext = maintext;
         this.date = date;
         this.name = name;
     }
 
-    public String getText() {
-        return mainText;
-    }
-
-    public void setText(String text) {
-        this.mainText = text;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
+    public Report(Long id, String maintext, String date, String name){
+        this.id = id;
+        this.maintext = maintext;
         this.date = date;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 }

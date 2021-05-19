@@ -47,7 +47,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     @Override
     public void onBindViewHolder(@NonNull ReportViewHolder holder, int position) {
         Report currentReport = reports.get(position);
-        holder.mainText.setText(currentReport.getText());
+        holder.mainText.setText(currentReport.getMaintext());
         holder.date.setText(currentReport.getDate());
         holder.name.setText(currentReport.getName());
     }

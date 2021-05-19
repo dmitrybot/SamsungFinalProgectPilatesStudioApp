@@ -47,7 +47,6 @@ public class ReportFragment extends Fragment {
         reports = MainActivity.getInstance().getReports();
         swipeRefresh = root.findViewById(R.id.swipeRefresh);
         reports = MainActivity.getInstance().getReports();
-        Log.d(reports.get(0).getName(), "dfgfbfdedwqedefrgftdesgnmjfdesesghfngdedgrhfngmfrdgfnhgfbfvg");
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {

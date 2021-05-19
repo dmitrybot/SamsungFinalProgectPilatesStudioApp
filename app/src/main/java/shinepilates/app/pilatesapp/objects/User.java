@@ -1,5 +1,7 @@
 package shinepilates.app.pilatesapp.objects;
 
+import java.util.List;
+
 import shinepilates.app.pilatesapp.model.UserModel;
 
 public class User {
@@ -13,6 +15,8 @@ public class User {
     private int    role;
     private String birthdata;
     private String sex;
+
+    List<Notification> notifications;
 
 
     public User(){
@@ -30,7 +34,7 @@ public class User {
         birthdata = "";
         sex = "0";
     }
-    public User(Long id, String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex) {
+    public User(Long id, String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex, List<Notification> notifications) {
         this.id = id;
         this.firstname = firstName;
         this.secondname = secondName;
@@ -41,6 +45,7 @@ public class User {
         this.role = role;
         birthdata = birthData;
         this.sex = sex;
+        this.notifications = notifications;
     }
 
     public User(String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex) {
@@ -149,7 +154,15 @@ public class User {
         phone,
         role,
         birthdata,
-        sex, lastphone);
+        sex, lastphone, notifications);
 
+    }
+
+    public List<Notification> getNotifications(){
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications){
+        this.notifications = notifications;
     }
 }
