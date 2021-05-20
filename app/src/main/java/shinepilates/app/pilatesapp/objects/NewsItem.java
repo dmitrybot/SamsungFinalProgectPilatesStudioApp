@@ -1,24 +1,16 @@
 package shinepilates.app.pilatesapp.objects;
 
 public class NewsItem {
-    private int ImageNews;
+    private Long id;
     private String date;
     private String tag;
-    private String main_text;
+    private String maintext;
 
-    public NewsItem(int imageNews, String date, String tag, String main_text){
-        ImageNews = imageNews;
+    public NewsItem(Long id, String date, String tag, String main_text){
+        this.id = id;
         this.date = date;
         this.tag = tag;
-        this.main_text = main_text;
-    }
-
-    public int getImageNews() {
-        return ImageNews;
-    }
-
-    public void setImageNews(int imageNews) {
-        ImageNews = imageNews;
+        this.maintext = main_text;
     }
 
     public String getDate() {
@@ -38,10 +30,10 @@ public class NewsItem {
     }
 
     public String getMain_text() {
-        return main_text;
+        return maintext;
     }
 
     public void setMain_text(String main_text) {
-        this.main_text = main_text;
+        this.maintext = main_text;
     }
 }

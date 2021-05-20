@@ -98,14 +98,14 @@ public class MainActivity extends AppCompatActivity{
 
     public void addTreners(){
         TrenersList = new ArrayList<>();
-        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Карпов Евгений", "Главный Тренер", "NICEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"));
-        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem(R.drawable.ic_android_test, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem(R.drawable.ic_icon_test, "Name", "position", "description"));
+        TrenersList.add( new TrenersItem((long) 1, "Карпов Евгений", "Главный Тренер", "NICEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"));
+        TrenersList.add( new TrenersItem((long) 2, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem((long) 3, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem((long) 4, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem((long) 5, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem((long) 6, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem((long) 7, "Имя", "Позиция", "Описание"));
+        TrenersList.add( new TrenersItem((long) 8, "Name", "position", "description"));
     }
 
     public ArrayList<TrenersItem> getTreners(){
@@ -114,14 +114,10 @@ public class MainActivity extends AppCompatActivity{
 
     public void addNews(){
         NewsList = new ArrayList<>();
-        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date1", "tag", "main_text"));
-        NewsList.add( new NewsItem(0, "date2", "tag", "main_text"));
-        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date3", "tag", "main_text"));
-        NewsList.add( new NewsItem(0, "date4", "tag", "main_text"));
-        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date5", "tag", "main_text"));
-        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date6", "tag", "main_text"));
-        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date7", "tag", "main_text"));
-        NewsList.add( new NewsItem(R.drawable.ic_android_test, "date8", "tag2", "main_text"));
+        NewsList.add( new NewsItem((long) 1, "date1", "tag", "main_text"));
+        NewsList.add( new NewsItem((long) 2, "date2", "tag", "main_text"));
+        NewsList.add( new NewsItem((long) 3, "date3", "tag", "main_text"));
+        NewsList.add( new NewsItem((long) 4, "date4", "tag", "main_text"));
     }
 
     public ArrayList<NewsItem> getNews(){
@@ -279,5 +275,13 @@ public class MainActivity extends AppCompatActivity{
 
     public void setReports(List<Report> r){
         Reports = (ArrayList) r;
+    }
+
+    public void setNews(List<NewsItem> news){
+        NewsList = (ArrayList) news;
+    }
+
+    public void setTreners(List<TrenersItem> treners){
+        TrenersList = (ArrayList) treners;
     }
 }

@@ -24,8 +24,10 @@ import shinepilates.app.pilatesapp.fragments.HomePageFragment;
 import shinepilates.app.pilatesapp.fragments.OwnDataFragment;
 import shinepilates.app.pilatesapp.fragments.RegistrationFragment;
 import shinepilates.app.pilatesapp.model.UserModel;
+import shinepilates.app.pilatesapp.objects.NewsItem;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
+import shinepilates.app.pilatesapp.objects.TrenersItem;
 import shinepilates.app.pilatesapp.objects.User;
 
 public class Network {
@@ -219,6 +221,98 @@ public class Network {
 
             @Override
             public void onFailure(Call<Notification> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+    /* ------------------------------------------------------------------------------------
+    notifications
+     ---------------------------------------------------------------------------------------*/
+
+    public void getNews() {
+        Call<List<NewsItem>> call = api.getNews();
+        call.enqueue(new Callback<List<NewsItem>>() {
+            @Override
+            public void onResponse(Call<List<NewsItem>> call, Response<List<NewsItem>> response) {
+                MainActivity.getInstance().setNews(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<NewsItem>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void postNews(NewsItem news) {
+        api.postNews(news).enqueue(new Callback<NewsItem>() {
+            @Override
+            public void onResponse(Call<NewsItem> call, Response<NewsItem> response) {
+                // body
+            }
+
+            @Override
+            public void onFailure(Call<NewsItem> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void deleteNews(NewsItem news) {
+        api.deleteNews(news).enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                //body
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+    /* ------------------------------------------------------------------------------------
+    treners
+     ---------------------------------------------------------------------------------------*/
+
+    public void getTreners() {
+        Call<List<TrenersItem>> call = api.getTreners();
+        call.enqueue(new Callback<List<TrenersItem>>() {
+            @Override
+            public void onResponse(Call<List<TrenersItem>> call, Response<List<TrenersItem>> response) {
+                MainActivity.getInstance().setTreners(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<TrenersItem>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void postTreners(TrenersItem treners) {
+        api.postTreners(treners).enqueue(new Callback<TrenersItem>() {
+            @Override
+            public void onResponse(Call<TrenersItem> call, Response<TrenersItem> response) {
+                // body
+            }
+
+            @Override
+            public void onFailure(Call<TrenersItem> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void deleteTreners(TrenersItem treners) {
+        api.deleteTreners(treners).enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                //body
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
                 t.printStackTrace();
             }
         });

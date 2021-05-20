@@ -17,8 +17,10 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import shinepilates.app.pilatesapp.model.UserModel;
+import shinepilates.app.pilatesapp.objects.NewsItem;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
+import shinepilates.app.pilatesapp.objects.TrenersItem;
 import shinepilates.app.pilatesapp.objects.User;
 
 public interface API {
@@ -58,4 +60,24 @@ public interface API {
 
     @DELETE("/notifications")
     Call deleteNotification(@Body Notification notification);
+
+    //news
+    @GET("news")
+    Call<List<NewsItem>> getNews();
+
+    @POST("news")
+    Call<NewsItem> postNews(@Body NewsItem news);
+
+    @DELETE("/news")
+    Call<NewsItem> deleteNews(@Body NewsItem news);
+
+    //treners
+    @GET("treners")
+    Call<List<TrenersItem>> getTreners();
+
+    @POST("treners")
+    Call<TrenersItem> postTreners(@Body TrenersItem treners);
+
+    @DELETE("/treners")
+    Call<TrenersItem> deleteTreners(@Body TrenersItem treners);
 }

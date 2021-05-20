@@ -52,7 +52,7 @@ public class TrenersAdapter extends RecyclerView.Adapter<TrenersAdapter.TrenersV
     public void onBindViewHolder(@NonNull TrenersViewHolder holder, int position) {
         TrenersItem currentItem = mTrenersList.get(position);
 
-        holder.TrenersImage.setImageResource(currentItem.getImageTreners());
+        holder.TrenersImage.setImageResource(R.drawable.ic_android_test);
         holder.TrenersName.setText(currentItem.getTrenersName());
         holder.TrenersPos.setText(currentItem.getTrenersPos());
         holder.TrenersDescr.setText(currentItem.getTrenersDescr());

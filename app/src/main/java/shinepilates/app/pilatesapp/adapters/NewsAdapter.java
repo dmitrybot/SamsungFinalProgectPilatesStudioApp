@@ -53,8 +53,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.NewsViewHolder holder, int position) {
         NewsItem currentItem = newsList.get(position);
-        if (currentItem.getImageNews() != 0){
-            holder.imageView.setImageResource(currentItem.getImageNews());
+        if (position % 2 == 0){
+            holder.imageView.setImageResource(R.drawable.ic_android_test);
         } else {
             holder.imageView.setVisibility(View.GONE);
         }
