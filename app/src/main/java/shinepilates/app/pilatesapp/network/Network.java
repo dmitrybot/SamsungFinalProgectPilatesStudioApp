@@ -1,17 +1,11 @@
 package shinepilates.app.pilatesapp.network;
 
-import android.os.Handler;
-import android.os.Message;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import okhttp3.ResponseBody;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,17 +23,24 @@ import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
 import shinepilates.app.pilatesapp.objects.TrenersItem;
 import shinepilates.app.pilatesapp.objects.User;
+import shinepilates.app.pilatesapp.objects.UserDAO;
+import shinepilates.app.pilatesapp.objects.UserDataBase;
+import shinepilates.app.pilatesapp.objects.UserModelRoom;
 
 public class Network {
     Retrofit retrofit;
     API api;
+    UserDAO db;
+    UserDataBase dataBase;
+    UserModelRoom userModelRoom;
+
 
     public Network() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.5:8080/")
+                .baseUrl("http://192.168.0.12:8080/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -67,6 +68,9 @@ public class Network {
 
     public void getUser(User user) {
         Call<User> call = api.getUser(user);
+        userModelRoom = MainActivity.getInstance().getUserModelRoom();
+        db = MainActivity.getInstance().getDataBase().getUserDao();
+        db.delete(userModelRoom);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -75,7 +79,7 @@ public class Network {
                 msg.obj = response.body();
                 handler.sendMessage(msg);*/
                 User u = response.body();
-                if (u.getPhone().equals("phone") || u.getPhone().equals("password")){
+                if (u.getPhone().equals("phone") || u.getPhone().equals("password")){ ///
                     AuthorizationFragment.getInstance().AuthFalse(u);
                 } else {
                     AuthorizationFragment.getInstance().AuthRight(u);
@@ -157,7 +161,8 @@ public class Network {
         api.postReport(report).enqueue(new Callback<Report>() {
             @Override
             public void onResponse(Call<Report> call, Response<Report> response) {
-                // body
+                getReports();
+                MainActivity.getInstance().goToFragment(R.id.nav_report);
             }
 
             @Override
@@ -168,14 +173,15 @@ public class Network {
     }
 
     public void deleteReport(Report report) {
-        api.deleteReport(report).enqueue(new Callback() {
+        System.out.println(report.getId());
+        api.deleteReport(report.getId()).enqueue(new Callback<Report>() {
             @Override
-            public void onResponse(Call call, Response response) {
-                //body
+            public void onResponse(Call<Report> call, Response<Report> response) {
+
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
+            public void onFailure(Call<Report> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -248,7 +254,8 @@ public class Network {
         api.postNews(news).enqueue(new Callback<NewsItem>() {
             @Override
             public void onResponse(Call<NewsItem> call, Response<NewsItem> response) {
-                // body
+                getNews();
+                MainActivity.getInstance().goToFragment(R.id.nav_news);
             }
 
             @Override
@@ -259,14 +266,14 @@ public class Network {
     }
 
     public void deleteNews(NewsItem news) {
-        api.deleteNews(news).enqueue(new Callback() {
+        api.deleteNews(news.getId()).enqueue(new Callback<NewsItem>() {
             @Override
-            public void onResponse(Call call, Response response) {
-                //body
+            public void onResponse(Call<NewsItem> call, Response<NewsItem> response) {
+
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
+            public void onFailure(Call<NewsItem> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -294,7 +301,8 @@ public class Network {
         api.postTreners(treners).enqueue(new Callback<TrenersItem>() {
             @Override
             public void onResponse(Call<TrenersItem> call, Response<TrenersItem> response) {
-                // body
+                getTreners();
+                MainActivity.getInstance().goToFragment(R.id.nav_treners);
             }
 
             @Override
@@ -305,14 +313,14 @@ public class Network {
     }
 
     public void deleteTreners(TrenersItem treners) {
-        api.deleteTreners(treners).enqueue(new Callback() {
+        api.deleteTreners(treners.getId()).enqueue(new Callback<TrenersItem>() {
             @Override
-            public void onResponse(Call call, Response response) {
-                //body
+            public void onResponse(Call<TrenersItem> call, Response<TrenersItem> response) {
+
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
+            public void onFailure(Call<TrenersItem> call, Throwable t) {
                 t.printStackTrace();
             }
         });

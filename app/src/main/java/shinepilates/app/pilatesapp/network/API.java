@@ -1,21 +1,14 @@
 package shinepilates.app.pilatesapp.network;
 
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
-
 import java.util.List;
-import java.util.Map;
 
-import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import shinepilates.app.pilatesapp.model.UserModel;
 import shinepilates.app.pilatesapp.objects.NewsItem;
 import shinepilates.app.pilatesapp.objects.Notification;
@@ -27,7 +20,9 @@ public interface API {
 
     //users
     @GET("users")
-    Call<List<User>> getAll();
+    default Call<List<User>> getAll() {
+        return null;
+    }
 
     @POST("user")
     Call<User> getUser(@Body User user);
@@ -48,8 +43,8 @@ public interface API {
     @POST("reports")
     Call<Report> postReport(@Body Report report);
 
-    @DELETE("/reports")
-    Call<Report> deleteReport(@Body Report report);
+    @DELETE("/reports/{id}")
+    Call<Report> deleteReport(@Path("id") Long id);
 
     //notifications
     @POST("/notifications/{userId}")
@@ -68,8 +63,8 @@ public interface API {
     @POST("news")
     Call<NewsItem> postNews(@Body NewsItem news);
 
-    @DELETE("/news")
-    Call<NewsItem> deleteNews(@Body NewsItem news);
+    @DELETE("/news/{id}")
+    Call<NewsItem> deleteNews(@Path("id") Long id);
 
     //treners
     @GET("treners")
@@ -78,6 +73,6 @@ public interface API {
     @POST("treners")
     Call<TrenersItem> postTreners(@Body TrenersItem treners);
 
-    @DELETE("/treners")
-    Call<TrenersItem> deleteTreners(@Body TrenersItem treners);
+    @DELETE("/treners/{id}")
+    Call<TrenersItem> deleteTreners(@Path("id") Long id);
 }

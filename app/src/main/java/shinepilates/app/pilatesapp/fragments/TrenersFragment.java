@@ -5,9 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
-import shinepilates.app.pilatesapp.adapters.NotificationAdapter;
 import shinepilates.app.pilatesapp.adapters.TrenersAdapter;
 import shinepilates.app.pilatesapp.objects.TrenersItem;
 import shinepilates.app.pilatesapp.objects.User;
@@ -31,6 +30,7 @@ public class TrenersFragment extends Fragment {
     private RecyclerView.LayoutManager LayoutManager;
     private SwipeRefreshLayout swipeRefresh;
     ArrayList<TrenersItem> treners = new ArrayList<>();
+    TrenersItem trener;
     User user;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,20 +58,20 @@ public class TrenersFragment extends Fragment {
                 if (direction == ItemTouchHelper.LEFT ) {
                     //newsList.remove(((NewsAdapter) RecyclerView.getAdapter()).getNewsList().get(viewHolder.getAdapterPosition()));
 
-                    ((TrenersAdapter) RecyclerView.getAdapter()).getTrenersList().remove(viewHolder.getAdapterPosition());
-                    RecyclerView.getAdapter().notifyDataSetChanged();
+                    trener = ((TrenersAdapter) RecyclerView.getAdapter()).getTrenersList().get(viewHolder.getAdapterPosition());
+                    MainActivity.getInstance().deleteTrener(trener);
                 }
             }
         };
-
-        if (MainActivity.getInstance().getUser().getRole() == 2){
-            new ItemTouchHelper(simpleCallback).attachToRecyclerView(RecyclerView);
-        }
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(RecyclerView);
 
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                MainActivity.getInstance().addTreners();
+                treners = MainActivity.getInstance().getTreners();
+                ((TrenersAdapter) RecyclerView.getAdapter()).setTrenersList(treners);
+                RecyclerView.getAdapter().notifyDataSetChanged();
                 swipeRefresh.setRefreshing(false);
             }
         });
@@ -81,10 +81,22 @@ public class TrenersFragment extends Fragment {
 
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        if ((MainActivity.getInstance().getUser().getRole() == 2)){
+        inflater.inflate(R.menu.menu_treners, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        /*if ((MainActivity.getInstance().getUser().getRole() == 2)){
             inflater.inflate(R.menu.menu_treners, menu);
             super.onCreateOptionsMenu(menu, inflater);
+        }*/
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()){
+            case R.id.addTrener:
+                MainActivity.getInstance().goToFragment(R.id.nav_addTrener);
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     /*public void update(){

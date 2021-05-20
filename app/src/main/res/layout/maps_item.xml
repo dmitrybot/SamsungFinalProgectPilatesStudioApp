@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/card_view"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:background="#F5F5F5"
+    android:layout_marginTop="18dp"
+    android:clickable="true"
+    android:layout_marginBottom="18dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="2dp"
+            android:id="@+id/map_imageView"/>
+
+        <TextView
+            android:id="@+id/studio_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Студия"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/map_imageView"
+            android:layout_toRightOf="@id/map_imageView" />
+
+
+        <TextView
+            android:id="@+id/studio_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Судия ShinePilates Москва, Ул.Каштоянца, Д.6, К.2"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:layout_toEndOf="@id/map_imageView"
+            android:layout_toRightOf="@id/map_imageView"
+            android:layout_below="@id/studio_name"
+            />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

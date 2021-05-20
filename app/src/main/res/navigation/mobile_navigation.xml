@@ -23,15 +23,43 @@
         tools:layout="@layout/fragment_app_info" />
 
     <fragment
+        android:label="Добавление Тренера"
+        android:id="@+id/nav_addTrener"
+        android:name="shinepilates.app.pilatesapp.fragments.AddTrenerFragment"
+        tools:layout="@layout/fragment_add_trener">
+        <action
+            android:id="@+id/action_nav_addTrener_to_nav_treners"
+            app:destination="@id/nav_treners" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_addNotification"
+        android:label="Добавление уведомления"
+        android:name="shinepilates.app.pilatesapp.fragments.AddNotificationFragment"
+        tools:layout="@layout/fragment_add_notification">
+        <action
+            android:id="@+id/action_nav_addNotification_to_nav_notifications"
+            app:destination="@id/nav_notifications" />
+    </fragment>
+
+    <fragment
         android:label="Новости"
         android:id="@+id/nav_news"
-        android:name="shinepilates.app.pilatesapp.fragments.NewsFragment"/>
+        android:name="shinepilates.app.pilatesapp.fragments.NewsFragment">
+        <action
+            android:id="@+id/action_nav_news_to_addNews"
+            app:destination="@id/addNews" />
+    </fragment>
 
     <fragment
         android:label="Уведомления"
         android:id="@+id/nav_notifications"
         android:name="shinepilates.app.pilatesapp.fragments.NotificationsFragment"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_nav_notifications_to_nav_addNotification"
+            app:destination="@id/nav_addNotification" />
+    </fragment>
 
     <fragment
         android:name="shinepilates.app.pilatesapp.fragments.AddReportFragment"
@@ -88,10 +116,24 @@
     </fragment>
 
     <fragment
-        android:label="Тренера"
+        android:label="Тренеры"
         android:id="@+id/nav_treners"
         android:name="shinepilates.app.pilatesapp.fragments.TrenersFragment"
-        tools:layout="@layout/fragment_treners" />
+        tools:layout="@layout/fragment_treners" >
+        <action
+            android:id="@+id/action_nav_treners_to_nav_addTrener"
+            app:destination="@id/nav_addTrener" />
+    </fragment>
+
+    <fragment
+        android:label="Добавить новость"
+        android:id="@+id/nav_addNews"
+        android:name="shinepilates.app.pilatesapp.fragments.AddNewsFragment"
+        tools:layout="@layout/fragment_add_news">
+        <action
+            android:id="@+id/action_addNews_to_nav_news"
+            app:destination="@id/nav_news" />
+    </fragment>
 
     <fragment
         android:label="Авторизация"

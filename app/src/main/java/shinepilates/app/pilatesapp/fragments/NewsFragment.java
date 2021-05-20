@@ -4,15 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,14 +21,13 @@ import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.adapters.NewsAdapter;
 import shinepilates.app.pilatesapp.objects.NewsItem;
-import shinepilates.app.pilatesapp.objects.User;
 
 public class NewsFragment extends Fragment {
     private androidx.recyclerview.widget.RecyclerView RecyclerView;
     private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager LayoutManager;
     private SwipeRefreshLayout swipeRefresh;
-    User user;
+    NewsItem news;
     ArrayList<NewsItem> newsList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,16 +54,13 @@ public class NewsFragment extends Fragment {
             public void onSwiped(@NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT ) {
                     //newsList.remove(((NewsAdapter) RecyclerView.getAdapter()).getNewsList().get(viewHolder.getAdapterPosition()));
-
-                    ((NewsAdapter) RecyclerView.getAdapter()).getNewsList().remove(viewHolder.getAdapterPosition());
-                    RecyclerView.getAdapter().notifyDataSetChanged();
+                    news = ((NewsAdapter) RecyclerView.getAdapter()).getNewsList().get(viewHolder.getAdapterPosition());
+                    MainActivity.getInstance().deleteNews(news);
                 }
             }
         };
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(RecyclerView);
 
-        if (MainActivity.getInstance().getUser().getRole() == 2){
-            new ItemTouchHelper(simpleCallback).attachToRecyclerView(RecyclerView);
-        }
 
 
 
@@ -75,7 +68,10 @@ public class NewsFragment extends Fragment {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                MainActivity.getInstance().addNews();
+                newsList = MainActivity.getInstance().getNews();
+                ((NewsAdapter) RecyclerView.getAdapter()).setNewsList(newsList);
+                RecyclerView.getAdapter().notifyDataSetChanged();
                 swipeRefresh.setRefreshing(false);
             }
         });
@@ -84,10 +80,22 @@ public class NewsFragment extends Fragment {
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        if ((MainActivity.getInstance().getUser().getRole() == 2)){
+        inflater.inflate(R.menu.menu_news, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        /*if ((MainActivity.getInstance().getUser().getRole() == 2)){
             inflater.inflate(R.menu.menu_news, menu);
             super.onCreateOptionsMenu(menu, inflater);
+        }*/
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()){
+            case R.id.addNews:
+                MainActivity.getInstance().goToFragment(R.id.nav_addNews);
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
 

@@ -12,9 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
+import shinepilates.app.pilatesapp.objects.UserDAO;
+import shinepilates.app.pilatesapp.objects.UserDataBase;
+import shinepilates.app.pilatesapp.objects.UserModelRoom;
 
 import static android.graphics.Color.RED;
 
@@ -23,7 +27,6 @@ public class RegistrationFragment extends Fragment {
     EditText phone, password, password2;
     CheckBox checkBoxUsersAgreenment, checkBoxConfidentialPolitics;
     TextView UsersAgreenment, ConfidentialPolitics, textView;
-
     private static RegistrationFragment instance;
 
     @Override
@@ -32,7 +35,8 @@ public class RegistrationFragment extends Fragment {
 
         instance = this;
     }
-
+    private UserDAO UserDao;
+    private UserModelRoom userRoom;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_registration, container, false);
@@ -45,11 +49,17 @@ public class RegistrationFragment extends Fragment {
         password = root.findViewById(R.id.passwordEdit);
         password2 = root.findViewById(R.id.passwordEdit2);
         textView = root.findViewById(R.id.textView);
+        UserDao = Room.databaseBuilder(getContext(), UserDataBase.class, "User").build().getUserDao();
+
 
         creation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Create(creation);
+
+
             }
         });
         UsersAgreenment.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +84,10 @@ public class RegistrationFragment extends Fragment {
         String pas2= String.valueOf(password2.getText());
         if (pas1.equals(pas2) && checkBoxConfidentialPolitics.isChecked() && checkBoxUsersAgreenment.isChecked()) {
             MainActivity.getInstance().addUser(ph, pas1);
+            /*if (UserDao.getUser() != null){
+                UserDao.delete(userRoom);
+                MainActivity.getInstance().addUserModel(null,null, null, pas1, null,ph, 0, null, null);
+            }*/
         }else if(ph.equals("") || pas1.equals("") || pas2.equals("")){
             textView.setTextColor(RED);
             textView.setTextSize(15);

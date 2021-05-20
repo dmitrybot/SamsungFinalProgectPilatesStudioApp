@@ -9,10 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
-import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
 
 public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportViewHolder> {
@@ -37,6 +37,10 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         return reports;
     }
 
+    public void setReportList(List<Report> ReportList) {
+        this.reports = (ArrayList) ReportList;
+    }
+
     @Override
     public ReportViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.report_item, parent, false);
@@ -49,7 +53,12 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         Report currentReport = reports.get(position);
         holder.mainText.setText(currentReport.getMaintext());
         holder.date.setText(currentReport.getDate());
-        holder.name.setText(currentReport.getName());
+        try{
+            holder.name.setText(currentReport.getName());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override

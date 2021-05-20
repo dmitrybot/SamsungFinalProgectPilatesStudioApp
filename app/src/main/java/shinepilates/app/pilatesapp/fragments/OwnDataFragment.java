@@ -1,14 +1,11 @@
 package shinepilates.app.pilatesapp.fragments;
 
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Space;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -19,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.objects.User;
+import shinepilates.app.pilatesapp.objects.UserModelRoom;
 
 import static android.graphics.Color.RED;
 
@@ -28,12 +26,14 @@ public class OwnDataFragment extends Fragment {
     Spinner spinnerSex;
     Button update;
     User user;
+    UserModelRoom userModelRoom;
 
     private static OwnDataFragment instance;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         user = MainActivity.getInstance().getUser();
         instance = this;
     }

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
@@ -38,6 +39,10 @@ public class TrenersAdapter extends RecyclerView.Adapter<TrenersAdapter.TrenersV
     public ArrayList<TrenersItem> getTrenersList(){
         mTrenersList = MainActivity.getInstance().getTreners();
         return mTrenersList;
+    }
+
+    public void setTrenersList(List<TrenersItem> TrenersList) {
+        this.mTrenersList = (ArrayList) TrenersList;
     }
 
     @NonNull

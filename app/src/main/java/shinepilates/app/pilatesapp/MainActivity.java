@@ -5,15 +5,6 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 
-import shinepilates.app.pilatesapp.network.Network;
-import shinepilates.app.pilatesapp.objects.NewsItem;
-import shinepilates.app.pilatesapp.objects.Notification;
-import shinepilates.app.pilatesapp.objects.Report;
-import shinepilates.app.pilatesapp.objects.TrenersItem;
-import shinepilates.app.pilatesapp.objects.User;
-
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,9 +15,23 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import shinepilates.app.pilatesapp.network.Network;
+import shinepilates.app.pilatesapp.objects.MapItem;
+import shinepilates.app.pilatesapp.objects.NewsItem;
+import shinepilates.app.pilatesapp.objects.Notification;
+import shinepilates.app.pilatesapp.objects.Report;
+import shinepilates.app.pilatesapp.objects.TrenersItem;
+import shinepilates.app.pilatesapp.objects.User;
+import shinepilates.app.pilatesapp.objects.UserDAO;
+import shinepilates.app.pilatesapp.objects.UserDataBase;
+import shinepilates.app.pilatesapp.objects.UserModelRoom;
 
 public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawer;
@@ -37,7 +42,11 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<NewsItem> NewsList =  new ArrayList<>();
     private ArrayList<Report> Reports = new ArrayList<>();
     private ArrayList<Notification> Notifications = new ArrayList<>();
+    private ArrayList<MapItem> Map = new ArrayList<>();
     private  ArrayList<User> users = new ArrayList<>();
+    UserDAO db;
+    UserDataBase dataBase;
+    UserModelRoom UserModelRoom;
     User user;
 
     Network network;
@@ -56,9 +65,10 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         drawer.setDrawerLockMode(drawer.LOCK_MODE_LOCKED_CLOSED);
-
+        dataBase = Room.databaseBuilder(this, UserDataBase.class, "User")
+                .allowMainThreadQueries().build();
+        db = dataBase.getUserDao();
         generateUser();
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_app_info,R.id.nav_news, R.id.nav_notifications, R.id.nav_report, R.id.nav_maps, R.id.nav_treners, R.id.nav_contacts
@@ -93,40 +103,69 @@ public class MainActivity extends AppCompatActivity{
                 navController.navigate(R.id.nav_news);
             }
         });
+        if (db.getUser() != null){
+            network.getUser(user);
+        }
     }
 
 
+
+
     public void addTreners(){
-        TrenersList = new ArrayList<>();
-        TrenersList.add( new TrenersItem((long) 1, "Карпов Евгений", "Главный Тренер", "NICEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"));
-        TrenersList.add( new TrenersItem((long) 2, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem((long) 3, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem((long) 4, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem((long) 5, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem((long) 6, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem((long) 7, "Имя", "Позиция", "Описание"));
-        TrenersList.add( new TrenersItem((long) 8, "Name", "position", "description"));
+        network.getTreners();
     }
 
     public ArrayList<TrenersItem> getTreners(){
         return TrenersList;
     }
 
+    public void addTrener (TrenersItem trenersItem){
+        network.postTreners(trenersItem);
+    }
+
+    public void deleteTrener(TrenersItem trenersItem){
+        network.deleteTreners(trenersItem);
+    }
+
+    public void addMap(){
+        Map = new ArrayList<>();
+        Map.add (new MapItem("Студия на проспекте Вернадского", "Студия ShinePilates Москва, Ул.Каштоянца, Д.8, К.1", R.drawable.ic_android_test));
+        Map.add (new MapItem("Студия на проспекте Вернадского 2", "Студия ShinePilates Москва, Ул.Каштоянца, Д.6, К.1", R.drawable.ic_android_test));
+    }
+
+    public ArrayList<MapItem> getMap(){
+        return Map;
+    }
+
     public void addNews(){
-        NewsList = new ArrayList<>();
-        NewsList.add( new NewsItem((long) 1, "date1", "tag", "main_text"));
-        NewsList.add( new NewsItem((long) 2, "date2", "tag", "main_text"));
-        NewsList.add( new NewsItem((long) 3, "date3", "tag", "main_text"));
-        NewsList.add( new NewsItem((long) 4, "date4", "tag", "main_text"));
+        network.getNews();
     }
 
     public ArrayList<NewsItem> getNews(){
         return NewsList;
     }
 
+    public void addNew(NewsItem news){
+        network.postNews(news);
+    }
+
+    public void deleteNews(NewsItem news){
+        network.deleteNews(news);
+    }
+
     public void addReports(){
         network.getReports();
     }
+
+    public void deleteReport(Report report){
+        network.deleteReport(report);
+    }
+
+    public void addReport(Report report){
+        network.postReport(report);
+
+    }
+
     public ArrayList<Report> getReports(){
         return Reports;
     }
@@ -168,6 +207,11 @@ public class MainActivity extends AppCompatActivity{
         user = u;
         network.postUser(u);
 
+    }
+
+    public void addUserModel(String firstName, String secondName, String lastName, String password, String email, String phone, int role, String birthData, String sex) {
+        UserModelRoom = new UserModelRoom(firstName, secondName, lastName, password,email, phone, role, birthData, sex);
+        db.insert(UserModelRoom);
     }
 
     /*@Override
@@ -228,6 +272,15 @@ public class MainActivity extends AppCompatActivity{
         addReports();
         addNotifications();
         addUsers();
+        addMap();
+    }
+
+    public UserDataBase getDataBase (){
+        return dataBase;
+    }
+
+    public UserModelRoom getUserModelRoom(){
+        return UserModelRoom;
     }
 
     private void getDataFromBD(){}

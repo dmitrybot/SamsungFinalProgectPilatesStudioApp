@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
@@ -35,6 +36,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     public NewsAdapter (ArrayList<NewsItem> newsList){
         this.newsList = newsList;
+    }
+
+    public void setNewsList(List<NewsItem> NewsList) {
+        this.newsList = (ArrayList) NewsList;
     }
 
     public ArrayList<NewsItem> getNewsList(){

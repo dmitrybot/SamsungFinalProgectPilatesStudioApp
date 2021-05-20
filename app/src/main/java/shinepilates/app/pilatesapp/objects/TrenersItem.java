@@ -1,5 +1,8 @@
 package shinepilates.app.pilatesapp.objects;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class TrenersItem {
     private Long id;
     private String trenersname;
@@ -11,6 +14,18 @@ public class TrenersItem {
         trenersname = TrenersName;
         trenerspos = TrenersPos;
         trenersdescr = TrenersDescr;
+    }
+
+    public void setTrenersname(String trenersname) {
+        this.trenersname = trenersname;
+    }
+
+    public void setTrenerspos(String trenerspos) {
+        this.trenerspos = trenerspos;
+    }
+
+    public void setTrenersdescr(String trenersdescr) {
+        this.trenersdescr = trenersdescr;
     }
 
     public String getTrenersName(){

@@ -1,5 +1,8 @@
 package shinepilates.app.pilatesapp.objects;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class NewsItem {
     private Long id;
     private String date;
@@ -11,6 +14,14 @@ public class NewsItem {
         this.date = date;
         this.tag = tag;
         this.maintext = main_text;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDate() {
@@ -33,7 +44,7 @@ public class NewsItem {
         return maintext;
     }
 
-    public void setMain_text(String main_text) {
+    public void setMainText(String main_text) {
         this.maintext = main_text;
     }
 }

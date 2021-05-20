@@ -6,16 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.objects.User;
+import shinepilates.app.pilatesapp.objects.UserDAO;
+import shinepilates.app.pilatesapp.objects.UserDataBase;
+import shinepilates.app.pilatesapp.objects.UserModelRoom;
 
 import static android.graphics.Color.RED;
 
@@ -24,6 +27,8 @@ public class AuthorizationFragment extends Fragment {
     Button enter;
     EditText phoneEdit, passwordEdit;
     static AuthorizationFragment instance;
+    private UserDAO UserDao;
+    private UserModelRoom userRoom;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +43,7 @@ public class AuthorizationFragment extends Fragment {
         enter = root.findViewById(R.id.enterButton);
         phoneEdit = root.findViewById(R.id.phoneEdit);
         passwordEdit = root.findViewById(R.id.passwordEdit);
-
+        UserDao = Room.databaseBuilder(getContext(), UserDataBase.class, "User").build().getUserDao();
         goToRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,8 +63,11 @@ public class AuthorizationFragment extends Fragment {
     public void EnterButton(View v){
         String phone = String.valueOf(phoneEdit.getText());
         String password = String.valueOf(passwordEdit.getText());
-        boolean k = true;
-        MainActivity.getInstance().Authorisation(phone, password);
+        if (password.equals(userRoom.getPassword()) && (phone.equals(userRoom.getPhone()))){
+            boolean k = true;
+            MainActivity.getInstance().Authorisation(phone, password);
+        }
+
     }
 
     public void AuthRight(User u){
