@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity{
         dataBase = Room.databaseBuilder(this, UserDataBase.class, "User")
                 .allowMainThreadQueries().build();
         db = dataBase.getUserDao();
-        generateUser();
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_app_info,R.id.nav_news, R.id.nav_notifications, R.id.nav_report, R.id.nav_maps, R.id.nav_treners, R.id.nav_contacts

@@ -18,6 +18,7 @@ import shinepilates.app.pilatesapp.fragments.HomePageFragment;
 import shinepilates.app.pilatesapp.fragments.OwnDataFragment;
 import shinepilates.app.pilatesapp.fragments.RegistrationFragment;
 import shinepilates.app.pilatesapp.model.UserModel;
+import shinepilates.app.pilatesapp.objects.Abonement;
 import shinepilates.app.pilatesapp.objects.NewsItem;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
@@ -40,7 +41,7 @@ public class Network {
                 .setLenient()
                 .create();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.12:8080/")
+                .baseUrl("http://192.168.1.2:8080/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -232,7 +233,7 @@ public class Network {
         });
     }
     /* ------------------------------------------------------------------------------------
-    notifications
+    news
      ---------------------------------------------------------------------------------------*/
 
     public void getNews() {
@@ -325,4 +326,50 @@ public class Network {
             }
         });
     }
+    /* ------------------------------------------------------------------------------------
+    abonements
+     ---------------------------------------------------------------------------------------*/
+
+    public void postAbonement(Abonement abonement, User user) {
+        api.postAbonement(abonement, user.getId()).enqueue(new Callback<Abonement>() {
+            @Override
+            public void onResponse(Call<Abonement> call, Response<Abonement> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Abonement> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void deleteAbonement(Abonement abonement) {
+        api.deleteAbonement(abonement.getId()).enqueue(new Callback<Abonement>() {
+            @Override
+            public void onResponse(Call<Abonement> call, Response<Abonement> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Abonement> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void updateAbonement(Abonement abonement){
+        api.updateAbonement(abonement.getId()).enqueue(new Callback<Abonement>() {
+            @Override
+            public void onResponse(Call<Abonement> call, Response<Abonement> response) {
+                //body
+            }
+
+            @Override
+            public void onFailure(Call<Abonement> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
 }

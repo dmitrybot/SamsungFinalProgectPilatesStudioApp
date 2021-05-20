@@ -18,6 +18,7 @@ public class User {
 
     List<Notification> notifications;
 
+    Abonement abonement;
 
     public User(){
         role = 0;
@@ -34,7 +35,7 @@ public class User {
         birthdata = "";
         sex = "0";
     }
-    public User(Long id, String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex, List<Notification> notifications) {
+    public User(Long id, String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex, List<Notification> notifications, Abonement abonement) {
         this.id = id;
         this.firstname = firstName;
         this.secondname = secondName;
@@ -46,6 +47,7 @@ public class User {
         birthdata = birthData;
         this.sex = sex;
         this.notifications = notifications;
+        this.abonement = abonement;
     }
 
     public User(String firstName, String secondName, String lastName, String Password, String Email, String Phone, int role, String birthData, String sex) {
