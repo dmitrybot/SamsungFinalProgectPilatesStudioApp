@@ -69,9 +69,6 @@ public class Network {
 
     public void getUser(User user) {
         Call<User> call = api.getUser(user);
-        userModelRoom = MainActivity.getInstance().getUserModelRoom();
-        db = MainActivity.getInstance().getDataBase().getUserDao();
-        db.delete(userModelRoom);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -191,6 +188,21 @@ public class Network {
     notifications
      ---------------------------------------------------------------------------------------*/
 
+    public void getNotifications(User user) {
+        Call<List<Notification>> call = api.getNotifications(user.getId());
+        call.enqueue(new Callback<List<Notification>>() {
+            @Override
+            public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
+                MainActivity.getInstance().setNotifications(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Notification>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
     public void postNotification(Notification notification, User user) {
         api.postNotification(notification, user.getId()).enqueue(new Callback<Notification>() {
             @Override
@@ -206,14 +218,14 @@ public class Network {
     }
 
     public void deleteNotification(Notification notification) {
-        api.deleteNotification(notification).enqueue(new Callback() {
+        api.deleteNotification(notification.getId()).enqueue(new Callback<Notification>() {
             @Override
-            public void onResponse(Call call, Response response) {
+            public void onResponse(Call<Notification> call, Response<Notification> response) {
                 //body
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
+            public void onFailure(Call<Notification> call, Throwable t) {
                 t.printStackTrace();
             }
         });

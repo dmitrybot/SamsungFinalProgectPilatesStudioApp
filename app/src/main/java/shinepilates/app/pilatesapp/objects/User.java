@@ -16,9 +16,9 @@ public class User {
     private String birthdata;
     private String sex;
 
-    List<Notification> notifications;
+    private List<Notification> notifications;
 
-    Abonement abonement;
+    private Abonement abonement;
 
     public User(){
         role = 0;
@@ -156,7 +156,7 @@ public class User {
         phone,
         role,
         birthdata,
-        sex, lastphone, notifications);
+        sex, lastphone, notifications, abonement);
 
     }
 
@@ -167,4 +167,13 @@ public class User {
     public void setNotifications(List<Notification> notifications){
         this.notifications = notifications;
     }
+
+    public Abonement getAbonement(){
+        return abonement;
+    }
+
+    public void setAbonement(Abonement abonement){
+        this.abonement = abonement;
+    }
+
 }

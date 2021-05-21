@@ -152,6 +152,10 @@ public class MainActivity extends AppCompatActivity{
         network.deleteNews(news);
     }
 
+    public void deleteNotification(Notification notification){
+        network.deleteNotification(notification);
+    }
+
     public void addReports(){
         network.getReports();
     }
@@ -167,25 +171,6 @@ public class MainActivity extends AppCompatActivity{
 
     public ArrayList<Report> getReports(){
         return Reports;
-    }
-
-    public void addNotifications(){
-        Notifications = new ArrayList<>();
-        Notifications.add(new Notification( "date1", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 1"));
-        Notifications.add(new Notification("date2", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 2"));
-        Notifications.add(new Notification("date3", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 3"));
-        Notifications.add(new Notification("date4", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 444"));
-        Notifications.add(new Notification("date5", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 555"));
     }
 
     public ArrayList<Notification> getNotifications(){
@@ -212,31 +197,6 @@ public class MainActivity extends AppCompatActivity{
         UserModelRoom = new UserModelRoom(firstName, secondName, lastName, password,email, phone, role, birthData, sex);
         db.insert(UserModelRoom);
     }
-
-    /*@Override
-    public void onBackPressed(){
-        if (drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.closeDrawer(GravityCompat.START);
-        }else {
-            super.onBackPressed();
-        }
-    }*/
-
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.extra_menu, menu);
-        return true;
-    }*/
-
-    /*public void Addclick (MenuItem item){
-        Layout layout;
-        AddReportFragment SF = new AddReportFragment();
-        FragmentTransaction FT = getSupportFragmentManager().beginTransaction();
-        FT.replace(R.id.drawer_layout, SF);
-        FT.commit();
-    }*/
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -269,7 +229,6 @@ public class MainActivity extends AppCompatActivity{
         addTreners();
         addNews();
         addReports();
-        addNotifications();
         addUsers();
         addMap();
     }
@@ -294,7 +253,7 @@ public class MainActivity extends AppCompatActivity{
         if (!user.getPhone().equals(Phone)){
             s = user.getPhone();
         }
-        User u = new User(user.getId(), firstName, secondName, lastName, Password, Email, Phone, role, birthData, sex, user.getNotifications());
+        User u = new User(user.getId(), firstName, secondName, lastName, Password, Email, Phone, role, birthData, sex, user.getNotifications(), user.getAbonement());
         network.updateUser(u, s);
     }
     public void updateUser(){
@@ -336,4 +295,13 @@ public class MainActivity extends AppCompatActivity{
     public void setTreners(List<TrenersItem> treners){
         TrenersList = (ArrayList) treners;
     }
+
+    public void setNotifications(List<Notification> notifications){
+        user.setNotifications(notifications);
+    }
+
+    public void updateNotifications(){
+        network.getNotifications(user);
+    }
+
 }

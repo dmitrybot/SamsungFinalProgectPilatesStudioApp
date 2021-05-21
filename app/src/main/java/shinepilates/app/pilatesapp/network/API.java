@@ -54,8 +54,11 @@ public interface API {
     @PUT("/notifications/{id}")
     Call<Notification> updateNotification(@Path("id") Long id);
 
-    @DELETE("/notifications")
-    Call deleteNotification(@Body Notification notification);
+    @DELETE("/notifications/{id}")
+    Call<Notification> deleteNotification(@Path("id") Long id);
+
+    @GET("/notifications/{id}")
+    Call<List<Notification>> getNotifications(@Path("id") Long id);
 
     //news
     @GET("news")

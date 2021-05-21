@@ -33,8 +33,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public ArrayList<Notification> getNotificationList(){
-        notifications = MainActivity.getInstance().getNotifications();
+        notifications = (ArrayList) MainActivity.getInstance().getUser().getNotifications();
         return notifications;
+    }
+
+    public void setNotificationList(ArrayList<Notification> notifications){
+        this.notifications = notifications;
     }
 
     @Override
