@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shinepilates.app.pilatesapp.objects.Abonement;
 import shinepilates.app.pilatesapp.objects.Notification;
 
 @Getter
@@ -27,9 +28,10 @@ public class UserModel {
     private String sex;
     private String lastphone;
     List<Notification> notifications;
+    Abonement abonement;
 
     public UserModel(Long id, String firstname, String secondname, String lastname, String password, String email, String phone,
-            int role, String birthdata, String sex, String lastphone, List<Notification> notifications){
+            int role, String birthdata, String sex, String lastphone, List<Notification> notifications, Abonement abonement){
         this.id         = id;
         this.firstname  = firstname;
         this.secondname = secondname;

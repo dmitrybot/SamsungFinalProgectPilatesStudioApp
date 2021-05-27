@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import shinepilates.app.pilatesapp.MainActivity;
 import shinepilates.app.pilatesapp.R;
 import shinepilates.app.pilatesapp.adapters.NotificationAdapter;
+import shinepilates.app.pilatesapp.adapters.ReportAdapter;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.User;
 
@@ -38,14 +40,15 @@ public class NotificationsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
         recyclerView = root.findViewById(R.id.recyclerview);
-        //recyclerView.setHasFixedSize(true);
+        user = MainActivity.getInstance().getUser();
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new NotificationAdapter(MainActivity.getInstance().getNotifications());
+        if (user.getNotifications() != null){
+            notifications = (ArrayList) user.getNotifications();
+        }
+        adapter = new NotificationAdapter(notifications);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         swipeRefresh = root.findViewById(R.id.swipeRefresh);
-        notifications = MainActivity.getInstance().getNotifications();
-
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -56,9 +59,8 @@ public class NotificationsFragment extends Fragment {
             public void onSwiped(@NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT ) {
                     //newsList.remove(((NewsAdapter) RecyclerView.getAdapter()).getNewsList().get(viewHolder.getAdapterPosition()));
-
-                    ((NotificationAdapter) recyclerView.getAdapter()).getNotificationList().remove(viewHolder.getAdapterPosition());
-                    recyclerView.getAdapter().notifyDataSetChanged();
+                    Notification notification = ((NotificationAdapter) recyclerView.getAdapter()).getNotificationList().get(viewHolder.getAdapterPosition());
+                    MainActivity.getInstance().deleteNotification(notification);
                 }
             }
         };
@@ -71,7 +73,12 @@ public class NotificationsFragment extends Fragment {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                if (user.getPhone() != null){
+                    MainActivity.getInstance().updateNotifications();
+                    notifications = (ArrayList) MainActivity.getInstance().getUser().getNotifications();
+                    ((NotificationAdapter) recyclerView.getAdapter()).setNotificationList(notifications);
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
                 swipeRefresh.setRefreshing(false);
             }
         });

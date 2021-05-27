@@ -69,12 +69,7 @@ public class AuthorizationFragment extends Fragment {
     public void EnterButton(View v){
         String phone = String.valueOf(phoneEdit.getText());
         String password = String.valueOf(passwordEdit.getText());
-        boolean k = true;
         MainActivity.getInstance().Authorisation(phone, password);
-        /*if (password.equals(userRoom.getPassword()) && (phone.equals(userRoom.getPhone()))){
-            boolean k = true;
-            MainActivity.getInstance().Authorisation(phone, password);
-        }*/
 
     }
 

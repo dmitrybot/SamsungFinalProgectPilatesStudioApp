@@ -10,6 +10,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import shinepilates.app.pilatesapp.model.UserModel;
+import shinepilates.app.pilatesapp.objects.Abonement;
 import shinepilates.app.pilatesapp.objects.NewsItem;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
@@ -53,8 +54,11 @@ public interface API {
     @PUT("/notifications/{id}")
     Call<Notification> updateNotification(@Path("id") Long id);
 
-    @DELETE("/notifications")
-    Call deleteNotification(@Body Notification notification);
+    @DELETE("/notifications/{id}")
+    Call<Notification> deleteNotification(@Path("id") Long id);
+
+    @GET("/notifications/{id}")
+    Call<List<Notification>> getNotifications(@Path("id") Long id);
 
     //news
     @GET("news")
@@ -75,4 +79,14 @@ public interface API {
 
     @DELETE("/treners/{id}")
     Call<TrenersItem> deleteTreners(@Path("id") Long id);
+
+    //abonements
+    @POST("/abonements/{userId}")
+    Call<Abonement> postAbonement(@Body Abonement abonement, @Path("id") Long userId);
+
+    @DELETE("/abonements/{id}")
+    Call<Abonement> deleteAbonement(@Path("id") Long id);
+
+    @PUT("/abonements/{id}")
+    Call<Abonement> updateAbonement(@Path("id") Long id);
 }

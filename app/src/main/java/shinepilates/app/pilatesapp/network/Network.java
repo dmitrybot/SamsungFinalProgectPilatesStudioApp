@@ -18,6 +18,7 @@ import shinepilates.app.pilatesapp.fragments.HomePageFragment;
 import shinepilates.app.pilatesapp.fragments.OwnDataFragment;
 import shinepilates.app.pilatesapp.fragments.RegistrationFragment;
 import shinepilates.app.pilatesapp.model.UserModel;
+import shinepilates.app.pilatesapp.objects.Abonement;
 import shinepilates.app.pilatesapp.objects.NewsItem;
 import shinepilates.app.pilatesapp.objects.Notification;
 import shinepilates.app.pilatesapp.objects.Report;
@@ -185,6 +186,21 @@ public class Network {
     notifications
      ---------------------------------------------------------------------------------------*/
 
+    public void getNotifications(User user) {
+        Call<List<Notification>> call = api.getNotifications(user.getId());
+        call.enqueue(new Callback<List<Notification>>() {
+            @Override
+            public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
+                MainActivity.getInstance().setNotifications(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Notification>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
     public void postNotification(Notification notification, User user) {
         api.postNotification(notification, user.getId()).enqueue(new Callback<Notification>() {
             @Override
@@ -200,14 +216,14 @@ public class Network {
     }
 
     public void deleteNotification(Notification notification) {
-        api.deleteNotification(notification).enqueue(new Callback() {
+        api.deleteNotification(notification.getId()).enqueue(new Callback<Notification>() {
             @Override
-            public void onResponse(Call call, Response response) {
+            public void onResponse(Call<Notification> call, Response<Notification> response) {
                 //body
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
+            public void onFailure(Call<Notification> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -227,7 +243,7 @@ public class Network {
         });
     }
     /* ------------------------------------------------------------------------------------
-    notifications
+    news
      ---------------------------------------------------------------------------------------*/
 
     public void getNews() {
@@ -320,4 +336,50 @@ public class Network {
             }
         });
     }
+    /* ------------------------------------------------------------------------------------
+    abonements
+     ---------------------------------------------------------------------------------------*/
+
+    public void postAbonement(Abonement abonement, User user) {
+        api.postAbonement(abonement, user.getId()).enqueue(new Callback<Abonement>() {
+            @Override
+            public void onResponse(Call<Abonement> call, Response<Abonement> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Abonement> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void deleteAbonement(Abonement abonement) {
+        api.deleteAbonement(abonement.getId()).enqueue(new Callback<Abonement>() {
+            @Override
+            public void onResponse(Call<Abonement> call, Response<Abonement> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Abonement> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void updateAbonement(Abonement abonement){
+        api.updateAbonement(abonement.getId()).enqueue(new Callback<Abonement>() {
+            @Override
+            public void onResponse(Call<Abonement> call, Response<Abonement> response) {
+                //body
+            }
+
+            @Override
+            public void onFailure(Call<Abonement> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
 }

@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         drawer.setDrawerLockMode(drawer.LOCK_MODE_LOCKED_CLOSED);
-
+        dataBase = Room.databaseBuilder(this, UserDataBase.class, "User")
+                .allowMainThreadQueries().build();
+        db = dataBase.getUserDao();
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_app_info,R.id.nav_news, R.id.nav_notifications, R.id.nav_report, R.id.nav_maps, R.id.nav_treners, R.id.nav_contacts
@@ -155,6 +157,10 @@ public class MainActivity extends AppCompatActivity{
         network.deleteNews(news);
     }
 
+    public void deleteNotification(Notification notification){
+        network.deleteNotification(notification);
+    }
+
     public void addReports(){
         network.getReports();
     }
@@ -170,25 +176,6 @@ public class MainActivity extends AppCompatActivity{
 
     public ArrayList<Report> getReports(){
         return Reports;
-    }
-
-    public void addNotifications(){
-        Notifications = new ArrayList<>();
-        Notifications.add(new Notification( "date1", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 1"));
-        Notifications.add(new Notification("date2", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 2"));
-        Notifications.add(new Notification("date3", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 3"));
-        Notifications.add(new Notification("date4", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 444"));
-        Notifications.add(new Notification("date5", "Texttttttttttttttttttttttttttttttt" +
-                "tttttttttttttt ttttttttttttttttttttttttttt tttttttttttttttttttttttttttttttttttttttttttttttttt" +
-                "tttttttttttttttttttttttttttttttttttttttt tttttttttttttttttttttttttt tttttttttttttttttttttttttttttttt 555"));
     }
 
     public ArrayList<Notification> getNotifications(){
@@ -219,31 +206,6 @@ public class MainActivity extends AppCompatActivity{
         db.insert(userModelRoom);
     }
 
-    /*@Override
-    public void onBackPressed(){
-        if (drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.closeDrawer(GravityCompat.START);
-        }else {
-            super.onBackPressed();
-        }
-    }*/
-
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.extra_menu, menu);
-        return true;
-    }*/
-
-    /*public void Addclick (MenuItem item){
-        Layout layout;
-        AddReportFragment SF = new AddReportFragment();
-        FragmentTransaction FT = getSupportFragmentManager().beginTransaction();
-        FT.replace(R.id.drawer_layout, SF);
-        FT.commit();
-    }*/
-
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -270,7 +232,6 @@ public class MainActivity extends AppCompatActivity{
         addTreners();
         addNews();
         addReports();
-        addNotifications();
         addUsers();
         addMap();
         if (db.getUser() != null){
@@ -301,7 +262,7 @@ public class MainActivity extends AppCompatActivity{
         if (!user.getPhone().equals(Phone)){
             s = user.getPhone();
         }
-        User u = new User(user.getId(), firstName, secondName, lastName, Password, Email, Phone, role, birthData, sex, user.getNotifications());
+        User u = new User(user.getId(), firstName, secondName, lastName, Password, Email, Phone, role, birthData, sex, user.getNotifications(), user.getAbonement());
         network.updateUser(u, s);
     }
     public void updateUser(){
@@ -345,7 +306,18 @@ public class MainActivity extends AppCompatActivity{
         TrenersList = (ArrayList) treners;
     }
 
+
     public void deleteUserRoom (){
         db.delete(userModelRoom);
     }
+
+    public void setNotifications(List<Notification> notifications){
+        user.setNotifications(notifications);
+    }
+
+    public void updateNotifications(){
+        network.getNotifications(user);
+    }
+
+
 }

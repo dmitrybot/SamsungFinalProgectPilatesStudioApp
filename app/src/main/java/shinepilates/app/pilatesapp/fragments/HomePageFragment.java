@@ -118,7 +118,7 @@ public class HomePageFragment extends Fragment {
             BuyAb.setVisibility(View.VISIBLE);
             MyRecords.setVisibility(View.VISIBLE);
             Loginization.setText("Выйти из учетной записи");
-            if (!user.getFullName().equals(" ")) {
+            if (!user.getFullName().equals(" ") && user.getFirstName() != null && user.getSecondName() != null) {
                 HelloText.setText("Добро пожаловать, " + user.getFullName() + " !");
             } else {
                 HelloText.setText("Добро пожаловать");
@@ -131,7 +131,7 @@ public class HomePageFragment extends Fragment {
             BuyAb.setVisibility(View.GONE);
             MyRecords.setVisibility(View.GONE);
             Loginization.setText("Выйти из учетной записи");
-            if (!user.getFullName().equals(" ")) {
+            if (!user.getFullName().equals(" ") && user.getFirstName() != null && user.getSecondName() != null) {
                 HelloText.setText("Добро пожаловать, " + user.getFullName() + " !");
             } else {
                 HelloText.setText("Добро пожаловать");
