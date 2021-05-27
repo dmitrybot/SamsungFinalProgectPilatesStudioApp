@@ -44,9 +44,13 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<Notification> Notifications = new ArrayList<>();
     private ArrayList<MapItem> Map = new ArrayList<>();
     private  ArrayList<User> users = new ArrayList<>();
+
+
     UserDAO db;
     UserDataBase dataBase;
-    UserModelRoom UserModelRoom;
+    UserModelRoom userModelRoom;
+
+
     User user;
 
     Network network;
@@ -60,15 +64,16 @@ public class MainActivity extends AppCompatActivity{
 
         network = new Network();
 
+        dataBase = Room.databaseBuilder(this, UserDataBase.class, "User")
+                .allowMainThreadQueries().build();
+        db = dataBase.getUserDao();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         drawer.setDrawerLockMode(drawer.LOCK_MODE_LOCKED_CLOSED);
-        dataBase = Room.databaseBuilder(this, UserDataBase.class, "User")
-                .allowMainThreadQueries().build();
-        db = dataBase.getUserDao();
-        generateUser();
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_app_info,R.id.nav_news, R.id.nav_notifications, R.id.nav_report, R.id.nav_maps, R.id.nav_treners, R.id.nav_contacts
@@ -103,9 +108,6 @@ public class MainActivity extends AppCompatActivity{
                 navController.navigate(R.id.nav_news);
             }
         });
-        if (db.getUser() != null){
-            network.getUser(user);
-        }
     }
 
 
@@ -209,9 +211,12 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    public void addUserModel(String firstName, String secondName, String lastName, String password, String email, String phone, int role, String birthData, String sex) {
-        UserModelRoom = new UserModelRoom(firstName, secondName, lastName, password,email, phone, role, birthData, sex);
-        db.insert(UserModelRoom);
+
+
+
+    public void addUserModel(String password, String phone) {
+        userModelRoom = new UserModelRoom(password,phone);
+        db.insert(userModelRoom);
     }
 
     /*@Override
@@ -262,17 +267,18 @@ public class MainActivity extends AppCompatActivity{
     }*/
 
     private void generateUser(){
-        if (bdcheck){
-            getDataFromBD();
-        } else {
-            user = new User();
-        }
         addTreners();
         addNews();
         addReports();
         addNotifications();
         addUsers();
         addMap();
+        if (db.getUser() != null){
+            userModelRoom = db.getUser();
+            user = User.toModel(userModelRoom);
+        } else {
+            user = new User();
+        }
     }
 
     public UserDataBase getDataBase (){
@@ -280,7 +286,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public UserModelRoom getUserModelRoom(){
-        return UserModelRoom;
+        return userModelRoom;
     }
 
     private void getDataFromBD(){}
@@ -303,6 +309,7 @@ public class MainActivity extends AppCompatActivity{
     }
     public void updateUser(User u){
         user = u;
+        System.out.println("9999999999999999999999999999999999999999999");
     }
 
     int C(){
@@ -336,5 +343,9 @@ public class MainActivity extends AppCompatActivity{
 
     public void setTreners(List<TrenersItem> treners){
         TrenersList = (ArrayList) treners;
+    }
+
+    public void deleteUserRoom (){
+        db.delete(userModelRoom);
     }
 }

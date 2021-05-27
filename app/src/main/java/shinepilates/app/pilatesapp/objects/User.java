@@ -165,4 +165,9 @@ public class User {
     public void setNotifications(List<Notification> notifications){
         this.notifications = notifications;
     }
+
+    public static User toModel (UserModelRoom userRoom){
+        User user = new User(userRoom.getPhone(), userRoom.getPassword());
+        return user;
+    }
 }

@@ -33,7 +33,7 @@ public class AddNewsFragment extends Fragment {
                 news.setMainText(Text2);
                 news.setTag(Text);
                 long epoch = System.currentTimeMillis() / 1000;
-                String date = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date(epoch * 1000));
+                String date = new java.text.SimpleDateFormat("dd.MM.yyyy").format(new java.util.Date(epoch * 1000));
                 news.setDate(date);
                 MainActivity.getInstance().addNew(news);
             }

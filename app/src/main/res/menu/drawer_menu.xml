@@ -19,7 +19,7 @@
             android:title="Отзывы">
         </item>
         <item android:id="@+id/nav_maps"
-            android:title="Карты">
+            android:title="Студии">
         </item>
         <item android:id="@+id/nav_contacts"
             android:title="Контакты">
@@ -28,7 +28,7 @@
             android:title="Личный кабинет">
         </item>
         <item android:id="@+id/nav_treners"
-            android:title="Тренера">
+            android:title="Тренеры">
         </item>
     </group>
 </menu>

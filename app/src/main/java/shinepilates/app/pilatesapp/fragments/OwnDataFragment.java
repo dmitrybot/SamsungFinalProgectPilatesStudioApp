@@ -35,6 +35,7 @@ public class OwnDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         user = MainActivity.getInstance().getUser();
+        userModelRoom = MainActivity.getInstance().getUserModelRoom();
         instance = this;
     }
 

@@ -34,7 +34,7 @@ public class AddReportFragment extends Fragment {
                 User user = MainActivity.getInstance().getUser();
                 report.setName(user.getFirstName());
                 long epoch = System.currentTimeMillis() / 1000;
-                String date = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date(epoch * 1000));
+                String date = new java.text.SimpleDateFormat("dd.MM.yyyy").format(new java.util.Date(epoch * 1000));
                 report.setDate(date);
                 MainActivity.getInstance().addReport(report);
             }

@@ -56,6 +56,7 @@ public class NewsFragment extends Fragment {
                     //newsList.remove(((NewsAdapter) RecyclerView.getAdapter()).getNewsList().get(viewHolder.getAdapterPosition()));
                     news = ((NewsAdapter) RecyclerView.getAdapter()).getNewsList().get(viewHolder.getAdapterPosition());
                     MainActivity.getInstance().deleteNews(news);
+
                 }
             }
         };

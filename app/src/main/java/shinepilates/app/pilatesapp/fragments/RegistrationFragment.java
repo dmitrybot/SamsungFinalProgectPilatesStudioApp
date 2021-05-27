@@ -37,6 +37,7 @@ public class RegistrationFragment extends Fragment {
     }
     private UserDAO UserDao;
     private UserModelRoom userRoom;
+    private UserDataBase dataBase;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_registration, container, false);
@@ -49,7 +50,10 @@ public class RegistrationFragment extends Fragment {
         password = root.findViewById(R.id.passwordEdit);
         password2 = root.findViewById(R.id.passwordEdit2);
         textView = root.findViewById(R.id.textView);
-        UserDao = Room.databaseBuilder(getContext(), UserDataBase.class, "User").build().getUserDao();
+        dataBase = Room.databaseBuilder(getContext(), UserDataBase.class, "User")
+                .allowMainThreadQueries().build();
+        UserDao = dataBase.getUserDao();
+
 
 
         creation.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +88,12 @@ public class RegistrationFragment extends Fragment {
         String pas2= String.valueOf(password2.getText());
         if (pas1.equals(pas2) && checkBoxConfidentialPolitics.isChecked() && checkBoxUsersAgreenment.isChecked()) {
             MainActivity.getInstance().addUser(ph, pas1);
+            if (UserDao.getUser() != null){
+                userRoom = UserDao.getUser();
+                UserDao.delete(userRoom);
+            }
+            MainActivity.getInstance().addUserModel(pas1, ph);
+            //MainActivity.getInstance().addUserModel(ph, pas1);
             /*if (UserDao.getUser() != null){
                 UserDao.delete(userRoom);
                 MainActivity.getInstance().addUserModel(null,null, null, pas1, null,ph, 0, null, null);

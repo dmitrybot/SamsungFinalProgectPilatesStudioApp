@@ -27,8 +27,11 @@ public class AuthorizationFragment extends Fragment {
     Button enter;
     EditText phoneEdit, passwordEdit;
     static AuthorizationFragment instance;
-    private UserDAO UserDao;
-    private UserModelRoom userRoom;
+    UserDAO UserDao;
+    UserDataBase dataBase;
+    UserModelRoom userRoom;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +46,10 @@ public class AuthorizationFragment extends Fragment {
         enter = root.findViewById(R.id.enterButton);
         phoneEdit = root.findViewById(R.id.phoneEdit);
         passwordEdit = root.findViewById(R.id.passwordEdit);
-        UserDao = Room.databaseBuilder(getContext(), UserDataBase.class, "User").build().getUserDao();
+        dataBase = Room.databaseBuilder(getContext(), UserDataBase.class, "User")
+                .allowMainThreadQueries().build();
+        UserDao = dataBase.getUserDao();
+        //User = MainActivity.getInstance().getUserModelRoom();
         goToRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,14 +69,21 @@ public class AuthorizationFragment extends Fragment {
     public void EnterButton(View v){
         String phone = String.valueOf(phoneEdit.getText());
         String password = String.valueOf(passwordEdit.getText());
-        if (password.equals(userRoom.getPassword()) && (phone.equals(userRoom.getPhone()))){
+        boolean k = true;
+        MainActivity.getInstance().Authorisation(phone, password);
+        /*if (password.equals(userRoom.getPassword()) && (phone.equals(userRoom.getPhone()))){
             boolean k = true;
             MainActivity.getInstance().Authorisation(phone, password);
-        }
+        }*/
 
     }
 
     public void AuthRight(User u){
+        if (UserDao.getUser() != null) {
+            userRoom = UserDao.getUser();
+            UserDao.delete(userRoom);
+        }
+        MainActivity.getInstance().addUserModel(u.getPassword(), u.getPhone());
         MainActivity.getInstance().updateUser(u);
         HomePageFragment.getInstance().generate();
         MainActivity.getInstance().goToFragment(R.id.nav_homepage);

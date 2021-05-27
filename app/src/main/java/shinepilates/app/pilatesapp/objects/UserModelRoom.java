@@ -2,6 +2,7 @@ package shinepilates.app.pilatesapp.objects;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -22,8 +23,21 @@ public class UserModelRoom implements Serializable {
     private String birthData;
     private String sex;
 
-    public UserModelRoom(String firstName, String secondName, String lastName, String password, String email, String phone, int role, String birthData, String sex) {
+    public UserModelRoom(String password,String phone) {
+        this.firstName = "";
+        this.secondName = "";
+        this.lastName = "";
+        this.password = password;
+        this.email = "";
+        this.phone = phone;
+        this.role = 1;
+        this.birthData = "";
+        this.sex = "";
+    }
+    @Ignore
+    public UserModelRoom(int id,String firstName, String secondName, String lastName, String password, String email, String phone, int role, String birthData, String sex) {
         this.firstName = firstName;
+        this.id = id;
         this.secondName = secondName;
         this.lastName = lastName;
         this.password = password;

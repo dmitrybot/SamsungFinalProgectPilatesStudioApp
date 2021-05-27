@@ -40,7 +40,7 @@ public class Network {
                 .setLenient()
                 .create();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.12:8080/")
+                .baseUrl("https://samsung-final-project.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -68,16 +68,10 @@ public class Network {
 
     public void getUser(User user) {
         Call<User> call = api.getUser(user);
-        userModelRoom = MainActivity.getInstance().getUserModelRoom();
-        db = MainActivity.getInstance().getDataBase().getUserDao();
-        db.delete(userModelRoom);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                /*Message msg = new Message();
 
-                msg.obj = response.body();
-                handler.sendMessage(msg);*/
                 User u = response.body();
                 if (u.getPhone().equals("phone") || u.getPhone().equals("password")){ ///
                     AuthorizationFragment.getInstance().AuthFalse(u);
@@ -92,6 +86,7 @@ public class Network {
             }
         });
     }
+
 
     public void postUser(User user) {
         api.postUser(user).enqueue(new Callback<User>() {
